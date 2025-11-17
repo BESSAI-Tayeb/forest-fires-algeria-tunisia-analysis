@@ -1,0 +1,13 @@
+geopandas
+geodatasets
+pyogrio
+rasterio
+pyproj
+shapely
+pandas
+numpy
+xarray
+netCDF4
+requests
+pyodbc
+matplotlib
