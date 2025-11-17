@@ -92,7 +92,9 @@ DM/
 │
 ├── scripts/                     # Utility scripts
 │   ├── compare_files.py        # Dataset comparison tool
-│   └── merge_datasets.py       # Coordinate-based merging script
+│   ├── download_data.py        # Dataset download helper
+│   ├── merge_datasets.py       # Coordinate-based merging script
+│   └── verify_data.py          # Dataset verification tool
 │
 ├── .gitignore                   # Git ignore rules
 ├── requirements.txt             # Python dependencies
@@ -105,27 +107,65 @@ DM/
 - Python 3.8+
 - Conda or virtualenv
 - Required packages (see `requirements.txt`)
+- ~5 GB free disk space for datasets
 
 ### Installation
 
-1. **Clone the repository**
+Follow these steps in order to set up the project:
+
+#### 1. **Clone the repository**
 ```bash
-git clone <repository-url>
-cd DM
+git clone https://github.com/BESSAI-Tayeb/forest-fires-algeria-tunisia-analysis.git
+cd forest-fires-algeria-tunisia-analysis
 ```
 
-2. **Create conda environment**
+#### 2. **Create and activate conda environment**
 ```bash
 conda create -n fire_prediction python=3.11
 conda activate fire_prediction
 ```
 
-3. **Install dependencies**
+#### 3. **Install dependencies**
 ```bash
 pip install -r requirements.txt
 ```
 
-### Required Python Packages
+#### 4. **Download the datasets**
+
+The datasets are hosted on Google Drive and need to be downloaded separately:
+
+```bash
+python scripts/download_data.py
+```
+
+This script will:
+- Provide the Google Drive link to download all datasets
+- Show instructions for manual download (recommended)
+- Display the expected directory structure
+- List alternative data sources
+
+**Manual Download Steps:**
+1. Visit: https://drive.google.com/drive/u/5/folders/1MNp9nhtKYCA66oLxesowKBpbf_ltBn9U
+2. Download all dataset folders (climate_dataset, elevation_dataset, fire_dataset, land_cover_dataset, soil_dataset)
+3. Extract them to the `dataset/` directory in your project root
+
+#### 5. **Verify the dataset installation**
+
+After downloading, verify that all required files are present:
+
+```bash
+python scripts/verify_data.py
+```
+
+This will check:
+- All dataset directories exist
+- Required files are present
+- File counts and sizes
+- Overall dataset integrity
+
+✅ Once verification passes, you're ready to run the analysis notebooks!
+
+### 📦 Required Python Packages
 - `numpy` - Numerical computing
 - `pandas` - Data manipulation
 - `geopandas` - Geospatial data processing
@@ -134,10 +174,13 @@ pip install -r requirements.txt
 - `seaborn` - Statistical plotting
 - `jupyter` - Interactive notebooks
 - `scikit-learn` - Data preprocessing (StandardScaler only)
+- `gdown` - Google Drive downloader (optional, for automated downloads)
 
 ## 📓 Usage
 
 ### 1. Data Processing Pipeline
+
+**Important**: Make sure you've completed all installation steps above, including downloading and verifying the datasets!
 
 Run the notebooks in the following order:
 
@@ -268,5 +311,6 @@ Data Mining Project - 2025/2026
 - [ ] Create automated model comparison pipeline
 - [ ] Add feature importance analysis
 - [ ] Develop fire risk mapping visualization
-#   f o r e s t - f i r e s - a l g e r i a - t u n i s i a - a n a l y s i s  
+#   f o r e s t - f i r e s - a l g e r i a - t u n i s i a - a n a l y s i s 
+ 
  

@@ -11,3 +11,7 @@ netCDF4
 requests
 pyodbc
 matplotlib
+seaborn
+scikit-learn
+jupyter
+gdown
