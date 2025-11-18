@@ -146,8 +146,40 @@ def extract_dataset(zip_path):
             
             print(f"   Total files to extract: {total_files}")
             
-            # Extract all files
-            zip_ref.extractall(dataset_dir)
+            # Extract to a temporary location first
+            temp_dir = project_root / "temp_extract"
+            temp_dir.mkdir(exist_ok=True)
+            zip_ref.extractall(temp_dir)
+            
+            # Check if there's a nested dataset folder
+            nested_dataset = temp_dir / "dataset"
+            if nested_dataset.exists() and nested_dataset.is_dir():
+                print("   Detected nested 'dataset' folder, fixing structure...")
+                # Move contents from nested dataset folder directly to dataset_dir
+                import shutil
+                for item in nested_dataset.iterdir():
+                    dest = dataset_dir / item.name
+                    if dest.exists():
+                        if dest.is_dir():
+                            shutil.rmtree(dest)
+                        else:
+                            dest.unlink()
+                    shutil.move(str(item), str(dataset_dir))
+                # Clean up temp directory
+                shutil.rmtree(temp_dir)
+            else:
+                # No nested folder, move everything from temp to dataset
+                import shutil
+                for item in temp_dir.iterdir():
+                    dest = dataset_dir / item.name
+                    if dest.exists():
+                        if dest.is_dir():
+                            shutil.rmtree(dest)
+                        else:
+                            dest.unlink()
+                    shutil.move(str(item), str(dataset_dir))
+                # Clean up temp directory
+                shutil.rmtree(temp_dir)
             
         print(f"\n✅ Extraction successful!")
         print(f"   {total_files} files extracted to {dataset_dir.absolute()}")
