@@ -9,7 +9,9 @@ This document describes the custom implementations of three machine learning mod
 1. [K-Nearest Neighbors (KNN)](#k-nearest-neighbors-knn)
 2. [Decision Tree](#decision-tree)
 3. [Random Forest](#random-forest)
-4. [Usage Examples](#usage-examples)
+4. [K-Means Clustering](#k-means-clustering)
+5. [DBSCAN Clustering](#dbscan-clustering)
+6. [Usage Examples](#usage-examples)
 
 ---
 
@@ -275,6 +277,152 @@ An ensemble learning method that constructs multiple decision trees during train
 
 ---
 
+## K-Means Clustering
+
+### Overview
+An unsupervised learning algorithm that partitions data into K clusters by minimizing within-cluster variance. Each cluster is represented by its centroid (mean of all points in the cluster).
+
+### Class: `KMeans`
+
+#### Constructor Parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `n_clusters` | int | 3 | Number of clusters to form |
+| `max_iters` | int | 100 | Maximum number of iterations |
+| `tol` | float | 1e-4 | Tolerance for convergence (change in centroids) |
+| `random_state` | int or None | None | Random seed for reproducibility |
+| `init` | str | 'k-means++' | Initialization method ('random' or 'k-means++') |
+
+#### Methods
+
+**`fit(X)`**
+- **Purpose**: Fit K-Means clustering on training data
+- **Input**:
+  - `X`: numpy.ndarray of shape `(n_samples, n_features)` - Training data
+- **Output**: Returns `self`
+
+**`predict(X)`**
+- **Purpose**: Predict cluster labels for new samples
+- **Input**:
+  - `X`: numpy.ndarray of shape `(n_samples, n_features)` - Test samples
+- **Output**: numpy.ndarray of shape `(n_samples,)` - Cluster labels
+
+**`fit_predict(X)`**
+- **Purpose**: Fit and predict clusters in one step
+- **Input**:
+  - `X`: numpy.ndarray of shape `(n_samples, n_features)` - Training data
+- **Output**: numpy.ndarray of shape `(n_samples,)` - Cluster labels
+
+**`transform(X)`**
+- **Purpose**: Transform X to cluster-distance space
+- **Input**:
+  - `X`: numpy.ndarray of shape `(n_samples, n_features)` - Samples to transform
+- **Output**: numpy.ndarray of shape `(n_samples, n_clusters)` - Distance to each centroid
+
+#### Attributes
+
+- `centroids`: Final cluster centroids
+- `labels_`: Cluster labels for training data
+- `inertia_`: Within-cluster sum of squares
+- `n_iter_`: Number of iterations until convergence
+
+#### Algorithm Details
+
+1. **Initialization**: Choose k initial centroids (random or k-means++)
+2. **Assignment**: Assign each point to nearest centroid
+3. **Update**: Recalculate centroids as mean of assigned points
+4. **Repeat**: Steps 2-3 until convergence or max iterations
+
+**K-means++ Initialization**: Smart initialization that selects initial centroids probabilistically based on distance from existing centroids, leading to faster convergence and better results.
+
+### When to Use
+
+- **Pros**:
+  - Simple and easy to implement
+  - Fast and scalable for large datasets
+  - Works well with spherical clusters
+  - Guaranteed to converge
+
+- **Cons**:
+  - Requires specifying number of clusters (k)
+  - Sensitive to initial centroid placement
+  - Assumes clusters are spherical and similar size
+  - Sensitive to outliers
+
+---
+
+## DBSCAN Clustering
+
+### Overview
+Density-Based Spatial Clustering of Applications with Noise (DBSCAN) is an unsupervised learning algorithm that groups together points that are closely packed and marks points in low-density regions as outliers (noise).
+
+### Class: `DBSCAN`
+
+#### Constructor Parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `eps` | float | 0.5 | Maximum distance between two samples for one to be in the neighborhood of the other |
+| `min_samples` | int | 5 | Minimum number of samples in a neighborhood for a point to be a core point |
+| `metric` | str | 'euclidean' | Distance metric ('euclidean' or 'manhattan') |
+
+#### Methods
+
+**`fit(X)`**
+- **Purpose**: Fit DBSCAN clustering on training data
+- **Input**:
+  - `X`: numpy.ndarray of shape `(n_samples, n_features)` - Training data
+- **Output**: Returns `self`
+
+**`fit_predict(X)`**
+- **Purpose**: Fit and predict clusters in one step
+- **Input**:
+  - `X`: numpy.ndarray of shape `(n_samples, n_features)` - Training data
+- **Output**: numpy.ndarray of shape `(n_samples,)` - Cluster labels (-1 for noise)
+
+**`get_core_samples()`**
+- **Purpose**: Get indices of core samples
+- **Output**: numpy.ndarray - Indices of core samples
+
+**`get_noise_samples()`**
+- **Purpose**: Get indices of noise/outlier samples
+- **Output**: numpy.ndarray - Indices of noise samples
+
+#### Attributes
+
+- `labels_`: Cluster labels for training data (-1 indicates noise)
+- `core_sample_indices_`: Indices of core samples
+- `n_clusters_`: Number of clusters found (excluding noise)
+
+#### Algorithm Details
+
+1. **Core Points**: Points with at least `min_samples` neighbors within `eps` distance
+2. **Border Points**: Non-core points within `eps` distance of a core point
+3. **Noise Points**: Points that are neither core nor border points (labeled as -1)
+
+**Process**:
+1. For each unvisited point, find all neighbors within eps distance
+2. If point has enough neighbors (≥ min_samples), start a new cluster
+3. Expand cluster by recursively adding neighbors and their neighbors
+4. Points that don't belong to any cluster are marked as noise
+
+### When to Use
+
+- **Pros**:
+  - Does not require specifying number of clusters
+  - Can find arbitrarily shaped clusters
+  - Robust to outliers (marks them as noise)
+  - Only needs two parameters (eps, min_samples)
+
+- **Cons**:
+  - Sensitive to eps and min_samples parameters
+  - Struggles with varying density clusters
+  - Not suitable for high-dimensional data
+  - Can be slow on large datasets
+
+---
+
 ## Usage Examples
 
 ### Example 1: KNN Classification
@@ -355,7 +503,66 @@ importances = rf.feature_importance(X_train, y_train)
 print("Feature importances:", importances)
 ```
 
-### Example 4: Comparing All Models
+### Example 4: K-Means Clustering
+
+```python
+import numpy as np
+from models import KMeans
+
+# Load your data (unsupervised - no labels needed)
+X = np.array([...])  # shape: (n_samples, n_features)
+
+# Create and fit K-Means
+kmeans = KMeans(n_clusters=3, random_state=42, init='k-means++')
+labels = kmeans.fit_predict(X)
+
+print(f"Cluster labels: {labels}")
+print(f"Centroids:\n{kmeans.centroids}")
+print(f"Inertia: {kmeans.inertia_:.2f}")
+print(f"Iterations: {kmeans.n_iter_}")
+
+# Predict cluster for new samples
+X_new = np.array([[...], [...]])
+new_labels = kmeans.predict(X_new)
+print(f"New samples assigned to clusters: {new_labels}")
+
+# Get distances to all centroids
+distances = kmeans.transform(X_new)
+print(f"Distances to centroids:\n{distances}")
+```
+
+### Example 5: DBSCAN Clustering
+
+```python
+import numpy as np
+from models import DBSCAN
+
+# Load your data
+X = np.array([...])  # shape: (n_samples, n_features)
+
+# Create and fit DBSCAN
+dbscan = DBSCAN(eps=0.5, min_samples=5, metric='euclidean')
+labels = dbscan.fit_predict(X)
+
+print(f"Cluster labels: {labels}")
+print(f"Number of clusters: {dbscan.n_clusters_}")
+print(f"Number of noise points: {len(dbscan.get_noise_samples())}")
+
+# Analyze clusters
+for cluster_id in range(dbscan.n_clusters_):
+    cluster_mask = labels == cluster_id
+    cluster_size = np.sum(cluster_mask)
+    print(f"Cluster {cluster_id}: {cluster_size} points")
+
+# Get core and noise samples
+core_samples = dbscan.get_core_samples()
+noise_samples = dbscan.get_noise_samples()
+
+print(f"\nCore samples indices: {core_samples}")
+print(f"Noise samples indices: {noise_samples}")
+```
+
+### Example 6: Comparing All Models
 
 ```python
 from models import KNN, DecisionTree, RandomForest
@@ -380,6 +587,28 @@ for name, model in models.items():
     print()
 ```
 
+### Example 7: Clustering Fire Data
+
+```python
+from models import KMeans, DBSCAN
+import numpy as np
+
+# Load fire location data (latitude, longitude, climate features, etc.)
+X = np.array([...])  # normalized features
+
+# Try K-Means to find geographic/climate clusters
+kmeans = KMeans(n_clusters=5, random_state=42)
+kmeans_labels = kmeans.fit_predict(X)
+
+# Try DBSCAN to find dense fire regions and outliers
+dbscan = DBSCAN(eps=0.3, min_samples=10)
+dbscan_labels = dbscan.fit_predict(X)
+
+print(f"K-Means found {kmeans.n_clusters_} predefined clusters")
+print(f"DBSCAN found {dbscan.n_clusters_} density-based clusters")
+print(f"DBSCAN identified {len(dbscan.get_noise_samples())} outlier fires")
+```
+
 ---
 
 ## Input Data Requirements
@@ -392,13 +621,17 @@ All models expect:
    - Type: numpy.ndarray
    - Shape: `(n_samples, n_features)`
    - Values: Numerical (int or float)
-   - Normalized/scaled: Recommended for KNN, optional for tree-based models
+   - Normalized/scaled: Recommended for KNN and clustering, optional for tree-based models
 
-2. **Target Labels (y)**:
+2. **Target Labels (y)** (for classification models only):
    - Type: numpy.ndarray
    - Shape: `(n_samples,)`
    - Values: Binary classification (0 or 1)
    - Should be integers or easily convertible to integers
+
+3. **Clustering Data (X)** (for KMeans and DBSCAN):
+   - No labels needed (unsupervised learning)
+   - Normalization highly recommended for distance-based algorithms
 
 ### Fire Prediction Context
 
@@ -424,12 +657,15 @@ target = 'class'  # 0 = no fire, 1 = fire
 
 ### Preprocessing Recommendations
 
-1. **Feature Scaling** (for KNN):
+1. **Feature Scaling** (for KNN and clustering):
    ```python
    from sklearn.preprocessing import StandardScaler
    scaler = StandardScaler()
    X_train_scaled = scaler.fit_transform(X_train)
    X_test_scaled = scaler.transform(X_test)
+   
+   # For clustering
+   X_scaled = scaler.fit_transform(X)
    ```
 
 2. **Handling Missing Values**:
@@ -463,11 +699,14 @@ target = 'class'  # 0 = no fire, 1 = fire
 - **KNN**: O(n × m) - stores all training data
 - **Decision Tree**: O(nodes × m) - stores tree structure
 - **Random Forest**: O(n_estimators × nodes × m) - stores multiple trees
+- **K-Means**: O(k × m) - stores k centroids
+- **DBSCAN**: O(n × m) - stores all training data
 
 Where:
 - n = number of training samples
 - m = number of features
 - nodes = number of nodes in tree
+- k = number of clusters
 
 ### Time Complexity
 
@@ -476,6 +715,10 @@ Where:
 | KNN | O(1) | O(n × m) |
 | Decision Tree | O(n × m × log n) | O(log nodes) |
 | Random Forest | O(n_estimators × n × m × log n) | O(n_estimators × log nodes) |
+| K-Means | O(k × n × m × iterations) | O(k × m) |
+| DBSCAN | O(n²) or O(n log n)* | N/A (no prediction) |
+
+*With spatial indexing (not implemented in basic version)
 
 ### Recommendations
 
@@ -490,20 +733,37 @@ Where:
 3. **Large Dataset (> 10000 samples)**:
    - Random Forest (with fewer estimators)
    - Avoid KNN (too slow)
-
-4. **High-Dimensional Data (many features)**:
-   - Random Forest with feature selection
-   - Avoid KNN (curse of dimensionality)
-
----
-
 ## Model Selection Guidelines
+
+### Classification Models
 
 | Criterion | KNN | Decision Tree | Random Forest |
 |-----------|-----|---------------|---------------|
 | Accuracy | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
 | Speed (Training) | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐ |
 | Speed (Prediction) | ⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ |
+| Interpretability | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐ |
+| Handles Overfitting | ⭐⭐⭐ | ⭐⭐ | ⭐⭐⭐⭐⭐ |
+| Feature Scaling Required | Yes | No | No |
+| Works with Missing Data | No | Yes* | Yes* |
+| Memory Usage | High | Low | High |
+
+### Clustering Models
+
+| Criterion | K-Means | DBSCAN |
+|-----------|---------|--------|
+| Finds Arbitrary Shapes | ⭐⭐ | ⭐⭐⭐⭐⭐ |
+| Speed | ⭐⭐⭐⭐ | ⭐⭐ |
+| Scalability | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ |
+| Handles Outliers | ⭐⭐ | ⭐⭐⭐⭐⭐ |
+| Requires K (# clusters) | Yes | No |
+| Feature Scaling Required | Yes | Yes |
+| Deterministic Results | No* | Yes |
+| Works with Varying Density | ⭐⭐ | ⭐⭐ |
+
+*K-Means can be deterministic with fixed random_state
+
+*With modifications (not implemented in basic version)
 | Interpretability | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐ |
 | Handles Overfitting | ⭐⭐⭐ | ⭐⭐ | ⭐⭐⭐⭐⭐ |
 | Feature Scaling Required | Yes | No | No |
@@ -520,18 +780,43 @@ Where:
 
 1. **"Arrays have different shapes"**
    - Ensure X and y have compatible shapes
-   - Check that n_samples is consistent
+5. **Out of memory errors**
+   - Reduce n_estimators for Random Forest
+   - Subsample your data
+   - Use max_depth to limit tree size
 
-2. **Poor KNN performance**
-   - Features may not be scaled
-   - k value may be too high or too low
-   - Try different distance metrics
+6. **K-Means converges to poor solution**
+   - Try different random_state values
+   - Use init='k-means++' for better initialization
+   - Run multiple times and select best (lowest inertia)
+   - Ensure features are scaled
 
-3. **Decision Tree overfitting**
-   - Increase min_samples_split
-   - Decrease max_depth
-   - Increase min_samples_leaf
+7. **DBSCAN finds only one cluster or all noise**
+   - Adjust eps parameter (distance threshold)
+   - Adjust min_samples parameter
+   - Ensure features are scaled
+   - Try plotting distance distribution to choose eps
 
+8. **DBSCAN is too slow**
+   - Reduce dataset size
+   - Consider using spatial indexing (not implemented)
+   - Use manhattan distance instead of euclidean
+
+9. **Cannot determine optimal number of clusters for K-Means**
+   - Use elbow method (plot inertia vs k)
+   - Try silhouette analysis
+   - Use domain knowledge
+   - Try DBSCAN instead (doesn't require k)
+
+---
+
+## References
+
+- **KNN**: Cover, T., & Hart, P. (1967). Nearest neighbor pattern classification
+- **Decision Trees**: Breiman, L., et al. (1984). Classification and Regression Trees (CART)
+- **Random Forest**: Breiman, L. (2001). Random Forests, Machine Learning
+- **K-Means**: MacQueen, J. (1967). Some methods for classification and analysis of multivariate observations
+- **DBSCAN**: Ester, M., et al. (1996). A density-based algorithm for discovering clusters in large spatial databases
 4. **Random Forest too slow**
    - Reduce n_estimators
    - Reduce max_depth
