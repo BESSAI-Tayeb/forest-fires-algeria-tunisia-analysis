@@ -1,0 +1,296 @@
+% Appendix
+\appendix
+
+\chapter{Project Repository Structure}
+\label{app:project}
+
+The project repository is organized as follows:
+
+\section*{Directory Structure}
+\begin{verbatim}
+Project/
+├── analysis/           # Jupyter notebooks for analysis
+├── backup/             # Backup data files
+├── dataset/            # Raw datasets
+├── models/             # Model implementation modules
+├── Report/             # LaTeX report files
+├── results/            # Output files and processed data
+├── scripts/            # Utility scripts
+├── requirements.txt    # Python dependencies
+└── README.md           # Project documentation
+\end{verbatim}
+
+\section*{Analysis Notebooks}
+\begin{itemize}
+    \item \texttt{fire.ipynb}: Fire dataset exploration
+    \item \texttt{climate.ipynb}: Climate data analysis
+    \item \texttt{elevation.ipynb}: DEM processing
+    \item \texttt{landcover.ipynb}: Land cover analysis
+    \item \texttt{soil.ipynb}: Soil data processing
+    \item \texttt{merge.ipynb}: Dataset integration
+    \item \texttt{feature\_engineering.ipynb}: Feature creation
+    \item \texttt{sampling.ipynb}: Negative sample generation
+    \item \texttt{knn.ipynb}, \texttt{decision\_tree.ipynb}, \texttt{random\_forest.ipynb}: Supervised models
+    \item \texttt{kmeans.ipynb}, \texttt{dbscan.ipynb}: Clustering analysis
+\end{itemize}
+
+\section*{Data Sources}
+\begin{itemize}
+    \item \textbf{Fire data}: NASA FIRMS (MODIS/VIIRS)
+    \item \textbf{Land cover}: FAO Global Land Cover Share
+    \item \textbf{Climate}: CHIRPS precipitation, TerraClimate temperature
+    \item \textbf{Elevation}: GMTED2010 DEM
+    \item \textbf{Soil}: HWSD v2.0
+\end{itemize}
+
+\chapter{Preprocessing Details}
+\label{app:preprocessing}
+
+\section*{Fire Dataset Statistics}
+\begin{table}[H]
+\centering
+\caption{Fire Dataset Quality Summary}
+\begin{tabular}{|l|c|c|}
+\hline
+\textbf{Attribute} & \textbf{Missing (\%)} & \textbf{Action} \\
+\hline
+Latitude/Longitude & 0.1 & Removed \\
+Brightness & 0.0 & None \\
+FRP & 2.3 & Median imputation \\
+Confidence & 1.8 & Mode imputation \\
+Acquisition date & 0.0 & None \\
+\hline
+\end{tabular}
+\end{table}
+
+\section*{Derived Topographic Variables}
+
+\textbf{Slope calculation} using Horn's algorithm:
+\begin{equation}
+    \text{Slope} = \arctan\left(\sqrt{\left(\frac{\partial z}{\partial x}\right)^2 + \left(\frac{\partial z}{\partial y}\right)^2}\right)
+\end{equation}
+
+\textbf{Aspect calculation}:
+\begin{equation}
+    \text{Aspect} = \arctan2\left(-\frac{\partial z}{\partial y}, -\frac{\partial z}{\partial x}\right)
+\end{equation}
+
+\textbf{Terrain complexity}: Standard deviation of elevation in a 3×3 pixel window.
+
+\textbf{Coastal proximity}: Euclidean distance to nearest coastline boundary in kilometers.
+
+\section*{Climate Feature Aggregation}
+
+Seasonal aggregations computed:
+\begin{itemize}
+    \item \texttt{prec\_winter}: December-February mean precipitation
+    \item \texttt{prec\_summer}: June-August mean precipitation
+    \item \texttt{tmax\_summer}: June-August mean maximum temperature
+    \item \texttt{tmin\_winter}: December-February mean minimum temperature
+    \item \texttt{total\_annual\_precip}: Sum of monthly precipitation
+    \item \texttt{annual\_temp\_range}: Annual maximum minus minimum temperature
+\end{itemize}
+
+\textbf{Drought Index} formula:
+\begin{equation}
+    \text{DI} = \frac{T_{summer} - \bar{T}_{summer}}{\sigma_T} - \frac{P_{summer} - \bar{P}_{summer}}{\sigma_P}
+\end{equation}
+
+Higher values indicate drier, hotter conditions.
+
+\chapter{Hyperparameter Tuning Details}
+\label{app:hyperparams}
+
+\section*{KNN Hyperparameters}
+\begin{table}[H]
+\centering
+\caption{KNN Cross-Validation Results}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{k} & \textbf{Mean F1} & \textbf{Std} \\
+\hline
+3 & -- & -- \\
+5 & -- & -- \\
+7 & -- & -- \\
+9 & -- & -- \\
+11 & -- & -- \\
+15 & -- & -- \\
+21 & -- & -- \\
+\hline
+\end{tabular}
+\end{table}
+
+\section*{Decision Tree Hyperparameters}
+Grid search space:
+\begin{itemize}
+    \item \texttt{max\_depth}: \{3, 5, 7, 10, 15, 20, None\}
+    \item \texttt{min\_samples\_split}: \{2, 5, 10, 20\}
+    \item \texttt{min\_samples\_leaf}: \{1, 2, 5, 10\}
+\end{itemize}
+
+\section*{Random Forest Hyperparameters}
+Grid search space:
+\begin{itemize}
+    \item \texttt{n\_estimators}: \{50, 100, 200, 300\}
+    \item \texttt{max\_depth}: \{10, 15, 20, None\}
+    \item \texttt{min\_samples\_split}: \{2, 5, 10\}
+    \item \texttt{max\_features}: \{sqrt, log2, 0.3\}
+\end{itemize}
+
+Best parameters found: [To be filled from experiments]
+
+\section*{Complete Feature List}
+\begin{table}[H]
+\centering
+\caption{All Features Used in Modeling}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Category} & \textbf{Features} \\
+\hline
+Geographic & latitude, longitude, lat\_long\_interaction \\
+\hline
+Climate - Temperature & tmax\_summer, tmax\_winter, tmin\_summer, tmin\_winter, \\
+ & annual\_temp\_range, summer\_heat\_index \\
+\hline
+Climate - Precipitation & prec\_summer, prec\_winter, prec\_autumn, prec\_spring, \\
+ & total\_annual\_precip, summer\_precip\_ratio \\
+\hline
+Climate - Derived & drought\_index \\
+\hline
+Topography & elevation, slope, aspect\_sin, aspect\_cos, \\
+ & terrain\_complexity, coastal\_proximity, \\
+ & elevation\_slope\_interaction \\
+\hline
+Soil & ORG\_CARBON, TOTAL\_N, PH\_WATER, SAND, \\
+ & CLAY, SILT, fine\_fraction, ph\_carbon\_interaction \\
+\hline
+\end{tabular}
+\end{table}
+
+\chapter{Clustering Details}
+\label{app:clustering}
+
+\section*{K-Means Configuration}
+\begin{itemize}
+    \item Initialization: k-means++ (intelligent seeding)
+    \item Maximum iterations: 300
+    \item Number of initializations: 10 (best result selected)
+    \item Convergence tolerance: $1 \times 10^{-4}$
+\end{itemize}
+
+\section*{K-Means Evaluation Metrics}
+\begin{table}[H]
+\centering
+\caption{K-Means Clustering Quality}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Metric} & \textbf{Value} \\
+\hline
+Number of Clusters (k) & -- \\
+Inertia (WCSS) & -- \\
+Silhouette Score & -- \\
+Calinski-Harabasz Index & -- \\
+Davies-Bouldin Index & -- \\
+\hline
+\end{tabular}
+\end{table}
+
+\section*{DBSCAN Configuration}
+\begin{itemize}
+    \item Epsilon ($\epsilon$): Selected from k-distance knee point
+    \item Min\_samples: dimensionality + 1
+    \item Metric: Euclidean distance
+\end{itemize}
+
+\section*{DBSCAN Results}
+\begin{table}[H]
+\centering
+\caption{DBSCAN Clustering Results}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Metric} & \textbf{Value} \\
+\hline
+Number of Clusters & -- \\
+Number of Noise Points & -- \\
+Percentage Noise & -- \\
+Silhouette Score (excl. noise) & -- \\
+\hline
+\end{tabular}
+\end{table}
+
+\section*{CLARANS Configuration}
+\begin{itemize}
+    \item Number of clusters: Same as K-Means
+    \item numlocal: 2
+    \item maxneighbor: max(250, 1.25\% × k × (n-k))
+\end{itemize}
+
+\section*{Clustering Comparison Summary}
+\begin{table}[H]
+\centering
+\caption{Clustering Performance Comparison}
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{Metric} & \textbf{K-Means} & \textbf{DBSCAN} & \textbf{CLARANS} \\
+\hline
+Clusters Found & -- & -- & -- \\
+Silhouette Score & -- & -- & -- \\
+Computation Time (s) & -- & -- & -- \\
+\hline
+\end{tabular}
+\end{table}
+
+\chapter{Additional Results}
+\label{app:results}
+
+\section*{Confusion Matrices}
+
+\textbf{Random Forest Confusion Matrix:}
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+ & \textbf{Predicted No Fire} & \textbf{Predicted Fire} \\
+\hline
+\textbf{Actual No Fire} & 1766 (TN) & 19 (FP) \\
+\hline
+\textbf{Actual Fire} & 85 (FN) & 680 (TP) \\
+\hline
+\end{tabular}
+\end{table}
+
+\section*{Feature Importance (Complete)}
+\begin{table}[H]
+\centering
+\caption{All Feature Importance Scores}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Feature} & \textbf{Importance} \\
+\hline
+coastal\_proximity & 0.114 \\
+lat\_long\_interaction & 0.067 \\
+elevation & 0.060 \\
+drought\_index & 0.058 \\
+prec\_winter & 0.054 \\
+elevation\_slope\_interaction & 0.044 \\
+tmax\_summer & 0.043 \\
+prec\_autumn & 0.040 \\
+total\_annual\_precip & 0.039 \\
+terrain\_complexity & 0.039 \\
+\hline
+\multicolumn{2}{|c|}{[Additional features...]} \\
+\hline
+\end{tabular}
+\end{table}
+
+\section*{Python Dependencies}
+\begin{verbatim}
+numpy>=1.21.0
+pandas>=1.3.0
+scikit-learn>=1.0.0
+geopandas>=0.10.0
+rasterio>=1.2.0
+matplotlib>=3.4.0
+seaborn>=0.11.0
+jupyter>=1.0.0
+\end{verbatim}
