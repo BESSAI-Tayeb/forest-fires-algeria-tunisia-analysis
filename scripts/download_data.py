@@ -51,7 +51,7 @@ def download_dataset():
     
     # Get project root directory
     project_root = Path(__file__).parent.parent
-    dataset_dir = project_root / "dataset"
+    dataset_dir = project_root / "test"
     download_path = project_root / "dataset.zip"
     
     print("="*80)
@@ -125,7 +125,7 @@ def extract_dataset(zip_path):
     """Extract the downloaded zip file."""
     
     project_root = Path(__file__).parent.parent
-    dataset_dir = project_root / "dataset"
+    dataset_dir = project_root / "test"
     
     print("\n" + "="*80)
     print("EXTRACTING DATASET")

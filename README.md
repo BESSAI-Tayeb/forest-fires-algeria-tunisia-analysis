@@ -62,43 +62,58 @@ This project analyzes fire risk patterns in Algeria and Tunisia by integrating m
 DM/
 ├── analysis/                    # Jupyter notebooks for data analysis
 │   ├── climate.ipynb           # Climate data processing & EDA
+│   ├── dbscan.ipynb            # DBSCAN clustering analysis
+│   ├── decision_tree.ipynb     # Decision Tree model analysis
 │   ├── elevation.ipynb         # Elevation feature extraction
+│   ├── feature_engineering.ipynb # Feature engineering pipeline
 │   ├── fire.ipynb              # Fire dataset processing
+│   ├── kmeans.ipynb            # K-Means clustering analysis
+│   ├── knn.ipynb               # KNN model analysis
 │   ├── landcover.ipynb         # Land cover analysis
 │   ├── merge.ipynb             # Dataset integration
-│   └── soil.ipynb              # Soil properties extraction
+│   ├── model_training.ipynb    # Model training & evaluation
+│   ├── random_forest.ipynb     # Random Forest model analysis
+│   ├── soil.ipynb              # Soil properties extraction
+│   └── undersampling.ipynb     # Data balancing techniques
 │
 ├── dataset/                     # Raw datasets (gitignored - large files)
 │   ├── climate_dataset/        # CHIRPS & TerraClimate rasters
+│   │   ├── prec/               # Precipitation data
+│   │   ├── tmax/               # Max temperature data
+│   │   └── tmin/               # Min temperature data
 │   ├── elevation_dataset/      # GMTED2010 elevation data
+│   │   ├── be15_grd/           # Raw elevation grid
+│   │   └── elevation_grd/      # Processed elevation grid
 │   ├── fire_dataset/           # FIRMS fire points (CSV)
+│   │   ├── algeria.csv
+│   │   ├── fires.csv
+│   │   └── tunisia.csv
 │   ├── land_cover_dataset/     # FAO land cover shapefiles
+│   │   ├── algeria/
+│   │   └── tunisia/
 │   └── soil_dataset/           # HWSD v2.0 soil data
+│       ├── HWSD2.bil
+│       ├── HWSD2.hdr
+│       ├── HWSD2.mdb
+│       ├── HWSD2.prj
+│       └── HWSD2.stx
 │
 ├── models/                      # Custom ML implementations
 │   ├── __init__.py
-│   ├── knn.py                  # K-Nearest Neighbors classifier
+│   ├── dbscan.py               # DBSCAN clustering algorithm
 │   ├── decision_tree.py        # Decision Tree (CART algorithm)
-│   ├── random_forest.py        # Random Forest ensemble
-│   └── README.md               # Model documentation
+│   ├── kmeans.py               # K-Means clustering algorithm
+│   ├── knn.py                  # K-Nearest Neighbors classifier
+│   └── random_forest.py        # Random Forest ensemble
 │
 ├── results/                     # Output datasets & reports
-│   ├── fires.csv               # Base fire points (cleaned)
-│   ├── fires_with_climate.csv  # Fire + climate features
-│   ├── fires_with_elevation_features.csv
-│   ├── fires_with_soil_features.csv
-│   ├── fires_merged_all_features.csv  # Final merged dataset
-│   └── *.txt                   # Processing summaries
 │
 ├── scripts/                     # Utility scripts
-│   ├── compare_files.py        # Dataset comparison tool
 │   ├── download_data.py        # Dataset download helper
-│   ├── merge_datasets.py       # Coordinate-based merging script
 │   └── verify_data.py          # Dataset verification tool
 │
 ├── .gitignore                   # Git ignore rules
-├── requirements.txt             # Python dependencies
-└── README.md                    # This file
+└── requirements.txt             # Python dependencies
 ```
 
 ## 🚀 Getting Started
