@@ -58,11 +58,12 @@ tmp/
 *.bak
 *.cache
 
+
 # Results 
 results/*
 !results/.gitkeep
 
-# PDF files (optional - uncomment if you don't want to track PDFs)
+# PDF files
 *.pdf
 
 # all markdown files
@@ -90,3 +91,7 @@ Desktop.ini
 *.zip
 *.tar.gz
 *.rar
+
+# report and backup folder
+report/
+backup/

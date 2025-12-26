@@ -46,12 +46,12 @@ def check_dependencies():
 def download_dataset():
     """Download the dataset from Google Drive."""
     
-    file_id = "1bTXDMtz6CcxLDGVE81ROIqMxfQtvWXOn"  
-    folder_url = "https://drive.google.com/drive/u/5/folders/1U8Pwz_UhZezCpqvX6RZl8uwSoxtHkQoJ"
+    file_id = "1jzSDxkb3csbDWQ3rWV2w6U7BvgNitqm_"
+    folder_url = "https://drive.google.com/drive/folders/1U8Pwz_UhZezCpqvX6RZl8uwSoxtHkQoJ"
     
     # Get project root directory
     project_root = Path(__file__).parent.parent
-    dataset_dir = project_root / "test"
+    dataset_dir = project_root / "dataset"
     download_path = project_root / "dataset.zip"
     
     print("="*80)
@@ -125,7 +125,7 @@ def extract_dataset(zip_path):
     """Extract the downloaded zip file."""
     
     project_root = Path(__file__).parent.parent
-    dataset_dir = project_root / "test"
+    dataset_dir = project_root / "dataset"
     
     print("\n" + "="*80)
     print("EXTRACTING DATASET")
