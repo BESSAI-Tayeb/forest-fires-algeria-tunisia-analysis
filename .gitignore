@@ -58,7 +58,6 @@ tmp/
 *.bak
 *.cache
 
-
 # Results 
 results/*
 !results/.gitkeep
@@ -93,5 +92,4 @@ Desktop.ini
 *.rar
 
 # report and backup folder
-report/
 backup/
