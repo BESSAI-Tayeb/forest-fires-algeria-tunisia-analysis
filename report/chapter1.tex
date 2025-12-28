@@ -18,7 +18,7 @@ The fire dataset is sourced from NASA's FIRMS (Fire Information for Resource Man
 
 \textbf{Key attributes} include: Latitude/Longitude (location), Brightness (fire intensity in Kelvin), FRP (Fire Radiative Power in MW), Confidence level, and Acquisition date/time.
 
-\subsection{Descriptive statistics for fire datasets}
+\subsection*{Descriptive statistics for fire datasets}
 
 The following tables show descriptive statistics computed from the raw fire records for Algeria and Tunisia (numeric columns only).
 
@@ -66,7 +66,7 @@ The following tables show descriptive statistics computed from the raw fire reco
     }
 \end{table}
 
-\subsection{Spatial Distribution}
+\subsection*{Spatial Distribution}
 Figure~\ref{fig:fire_spatial_algeria} and Figure~\ref{fig:fire_spatial_tunisia} display the geographic distribution of fire detections overlaid on country boundaries.
 
 \begin{figure}[H]
@@ -88,7 +88,7 @@ Figure~\ref{fig:fire_spatial_algeria} and Figure~\ref{fig:fire_spatial_tunisia} 
 
 \textbf{Spatial insights:} Fires concentrate in northern coastal regions with Mediterranean vegetation, mountainous forested areas (Atlas Mountains), and transition zones between Mediterranean and semi-arid climates. Algeria exhibits significantly more fire detections (87,446) compared to Tunisia (2,804), reflecting both country size and vegetation density differences.
 
-\subsection{Univariate Analysis}
+\subsection*{Univariate Analysis}
 Figure~\ref{fig:fire_univariate} presents histograms and boxplots for key fire attributes, comparing distributions between Algeria and Tunisia.
 
 \begin{figure}[H]
@@ -108,7 +108,7 @@ Figure~\ref{fig:fire_univariate} presents histograms and boxplots for key fire a
 \textbf{Univariate insights:} Both countries show similar brightness temperature distributions (mean $\approx$ 320~K), indicating comparable fire intensities. Fire Radiative Power (FRP) is right-skewed with most fires being low-intensity events. Outliers in FRP represent extreme fire events requiring special attention in modeling.
 
 \newpage
-\subsection*{Fire Type Distribution}
+\subsection**{Fire Type Distribution}
 
 \noindent The \textbf{type} column classifies the heat source. Classification key : \\
 0 = Presumed vegetation fire (Retained) \\
@@ -137,7 +137,7 @@ Figure~\ref{fig:fire_univariate} presents histograms and boxplots for key fire a
     \end{minipage}
 \end{figure}
 
-\subsection{Bivariate Analysis}
+\subsection*{Bivariate Analysis}
 Figure~\ref{fig:fire_qq_bright} and Figure~\ref{fig:fire_qq_frp} present Q-Q plots comparing the distributions of key fire attributes between Algeria and Tunisia.
 
 \begin{figure}[H]
@@ -183,7 +183,7 @@ Figure~\ref{fig:fire_scatter} shows pairwise scatter plots between selected fire
 
 \textbf{Scatter insights:} Geographic coordinates (latitude, longitude) show weak correlation with intensity metrics, suggesting fire severity is independent of location. The scatter plots also reveal clustering patterns in fire occurrence.
 
-\subsection{Temporal Analysis}
+\subsection*{Temporal Analysis}
 Figure~\ref{fig:fire_daily} and Figure~\ref{fig:fire_weekly} show daily and weekly fire counts throughout the year, highlighting short-term variability and smoothed seasonal trends respectively.
 
 \begin{figure}[H]
@@ -210,7 +210,7 @@ Land cover data from the FAO Global Land Cover Share database classifies surface
 
 \textbf{Key attributes} include: Land cover class (categorical), coverage percentage, and geographic polygons defining each land cover zone.
 
-\subsection{Raster Visualization}
+\subsection*{Raster Visualization}
 Figure~\ref{fig:landcover_raster} displays the land cover classification map for Algeria and Tunisia with fire point locations overlaid.
 
 \begin{figure}[H]
@@ -222,7 +222,7 @@ Figure~\ref{fig:landcover_raster} displays the land cover classification map for
 
 \textbf{Raster insights:} The visualization reveals distinct land cover zones across the study area. Northern coastal regions exhibit dense forest and shrubland coverage, while southern areas transition to sparse vegetation and bare land. Fire points cluster predominantly in vegetated zones, confirming the relationship between fuel availability and fire occurrence.
 
-\subsection{Univariate Analysis}
+\subsection*{Univariate Analysis}
 Figure~\ref{fig:landcover_univariate} presents the distribution of fire points across different land cover classes.
 
 \begin{figure}[H]
@@ -234,7 +234,7 @@ Figure~\ref{fig:landcover_univariate} presents the distribution of fire points a
 
 \textbf{Univariate insights:} Forests and shrublands account for the majority of fire detections, reflecting higher fuel loads in these vegetation types. Agricultural lands show moderate fire activity, often associated with crop residue burning. Urban and water bodies exhibit negligible fire occurrence as expected.
 
-\subsection{Bivariate Analysis}
+\subsection*{Bivariate Analysis}
 Figure~\ref{fig:landcover_bivariate} shows the relationship between land cover types and fire intensity metrics.
 
 \begin{figure}[H]
@@ -246,7 +246,7 @@ Figure~\ref{fig:landcover_bivariate} shows the relationship between land cover t
 
 \textbf{Bivariate insights:} Forest fires tend to exhibit higher Fire Radiative Power (FRP) values compared to grassland or agricultural fires, indicating more intense burning in wooded areas. Shrubland fires show intermediate intensity levels, consistent with moderate fuel density.
 
-\subsection{Spatial Analysis}
+\subsection*{Spatial Analysis}
 Figure~\ref{fig:landcover_spatial} presents the spatial distribution of land cover classes relative to fire hotspots.
 
 \begin{figure}[H]
@@ -263,7 +263,7 @@ Climate data comes from CHIRPS (precipitation) and TerraClimate (temperature) wi
 
 \textbf{Variables:} Precipitation (mm/month), Maximum temperature (°C), Minimum temperature (°C).
 
-\subsection{Raster Visualization}
+\subsection*{Raster Visualization}
 Figure~\ref{fig:climate_raster} displays the climate raster layers (precipitation and temperature) for the study region with fire locations overlaid.
 
 \begin{figure}[H]
@@ -275,7 +275,7 @@ Figure~\ref{fig:climate_raster} displays the climate raster layers (precipitatio
 
 \textbf{Raster insights:} The climate rasters reveal a strong north-south gradient, with higher precipitation along the Mediterranean coast and increasing aridity toward the Sahara. Temperature patterns show inverse gradients during summer months. Fire points concentrate in regions with moderate precipitation—sufficient to support vegetation but prone to seasonal drought.
 
-\subsection{Univariate Analysis}
+\subsection*{Univariate Analysis}
 Figure~\ref{fig:climate_univariate} presents histograms and boxplots for climate variables at fire locations.
 
 \begin{figure}[H]
@@ -287,7 +287,7 @@ Figure~\ref{fig:climate_univariate} presents histograms and boxplots for climate
 
 \textbf{Univariate insights:} Maximum temperature at fire locations shows a right-skewed distribution with most fires occurring at temperatures above 30°C. Precipitation values are predominantly low during fire events, confirming drought as a key fire driver. The distributions highlight the Mediterranean climate signature of hot, dry summers.
 
-\subsection{Bivariate Analysis}
+\subsection*{Bivariate Analysis}
 Figure~\ref{fig:climate_bivariate} shows the correlation between climate variables and their relationship with fire occurrence.
 
 \begin{figure}[H]
@@ -299,7 +299,7 @@ Figure~\ref{fig:climate_bivariate} shows the correlation between climate variabl
 
 \textbf{Bivariate insights:} Strong negative correlation exists between precipitation and maximum temperature, typical of Mediterranean climates. Fire occurrence correlates positively with temperature and negatively with precipitation, validating the drought-fire relationship. These correlations support the derivation of a drought index as a composite predictor.
 
-\subsection{Temporal Analysis}
+\subsection*{Temporal Analysis}
 Figure~\ref{fig:climate_temporal} presents the seasonal patterns of climate variables and their alignment with fire occurrence.
 
 \begin{figure}[H]
@@ -317,7 +317,7 @@ Elevation data from GMTED2010 provides a Digital Elevation Model at 15 arc-secon
 
 \textbf{Key attributes} include: Elevation (meters above sea level), Slope (degrees), Aspect (orientation in degrees), and Terrain Roughness Index (TRI).
 
-\subsection{Derived Terrain Features}
+\subsection*{Derived Terrain Features}
 From the raw elevation raster, we compute three derived terrain features that characterize the topographic conditions at each fire location:
 
 \textbf{Slope} measures the steepness of the terrain in degrees. It is computed using the gradient of the elevation surface:
@@ -338,7 +338,7 @@ This transformation converts the mathematical angle to a compass bearing where 0
 \]
 where $z_{\text{center}}$ is the elevation of the central cell and $z_i$ are the elevations of the surrounding cells. Higher TRI values indicate more rugged terrain with greater elevation variability.
 
-\subsection{Raster Visualization}
+\subsection*{Raster Visualization}
 Figure~\ref{fig:elevation_raster} displays the elevation raster clipped to the study area with fire point locations overlaid.
 
 \begin{figure}[H]
@@ -350,7 +350,7 @@ Figure~\ref{fig:elevation_raster} displays the elevation raster clipped to the s
 
 \textbf{Raster insights:} The elevation map reveals the complex topography of the study region, from coastal lowlands to the Atlas Mountain ranges. Fire points are distributed across various elevation zones but show concentration in mid-elevation forested areas (500--1500~m) where Mediterranean forests are prevalent.
 
-\subsection{Univariate Analysis}
+\subsection*{Univariate Analysis}
 Figure~\ref{fig:elevation_univariate} presents histograms, boxplots, and Q-Q plots for terrain features at fire locations.
 
 \begin{figure}[H]
@@ -362,7 +362,7 @@ Figure~\ref{fig:elevation_univariate} presents histograms, boxplots, and Q-Q plo
 
 \textbf{Univariate insights:} Elevation at fire locations shows a bimodal distribution with peaks at low coastal elevations and mid-mountain elevations. Slope values are predominantly moderate (5--15°), while aspect shows relatively uniform distribution with slight preference for south-facing slopes. Terrain roughness values indicate fires occur in moderately complex terrain.
 
-\subsection{Bivariate Analysis}
+\subsection*{Bivariate Analysis}
 Figure~\ref{fig:elevation_bivariate} shows the correlation between terrain features and their relationship with fire class.
 
 \begin{figure}[H]
@@ -374,7 +374,7 @@ Figure~\ref{fig:elevation_bivariate} shows the correlation between terrain featu
 
 \textbf{Bivariate insights:} Strong positive correlation exists between slope and terrain roughness, as expected from their computational relationship. Elevation shows moderate correlation with slope in mountainous areas. The pairwise plots reveal distinct clustering patterns that may inform terrain-based fire risk classification.
 
-\subsection{Spatial Analysis}
+\subsection*{Spatial Analysis}
 Figure~\ref{fig:elevation_spatial} presents the spatial relationship between topographic features and fire density.
 
 \begin{figure}[H]
@@ -391,7 +391,52 @@ Soil data from the Harmonized World Soil Database v2.0 (HWSD2) provides properti
 
 \textbf{Key attributes} include: Soil classification (categorical), organic carbon content (\%), pH level, sand/clay/silt fractions (\%), and soil drainage properties.
 
-\subsection{Raster Visualization}
+\subsection*{Dataset Summary Statistics}
+
+\begin{table}[H]
+    \centering
+    \caption{HWSD2 Dataset Summary}
+    \label{tab:hwsd2_summary}
+    \begin{tabular}{ll}
+    \hline
+    \textbf{Component} & \textbf{Value} \\
+    \hline
+    \multicolumn{2}{l}{\textit{Tabular Data (MDB)}} \\
+    Records loaded & 58,405 \\
+    Total features & 22 \\
+    Physical properties & 8 features \\
+    Chemical properties & 14 features \\
+    Data layer & D1 (topsoil/surface layer) \\
+    \hline
+    \multicolumn{2}{l}{\textit{Spatial Data (Raster)}} \\
+    Dimensions & 21,600 $\times$ 43,200 pixels \\
+    Total pixels & 933,120,000 \\
+    Memory size & 1,779.79 MB \\
+    \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \caption{Descriptive Statistics - Raw Soil Data (Physical Properties)}
+    \label{tab:soil_desc_stats}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{lrrrrrrr}
+    \hline
+    & count & mean & std & min & 25\% & 50\% & 75\% \\
+    \hline
+    COARSE & 58,405 & 11.18 & 8.44 & -9.00 & 4.00 & 10.00 & 18.00 \\
+    SAND & 58,405 & 46.05 & 17.35 & -9.00 & 36.00 & 43.00 & 55.00 \\
+    SILT & 58,405 & 30.21 & 11.97 & -9.00 & 23.00 & 31.00 & 38.00 \\
+    CLAY & 58,405 & 21.28 & 10.55 & -9.00 & 16.00 & 20.00 & 27.00 \\
+    \hline
+    \end{tabular}%
+    }
+\end{table}
+
+\textit{Note:} Minimum values of -9 indicate sentinel/missing values in the raw data, which are replaced during preprocessing.
+
+\subsection*{Raster Visualization}
 Figure~\ref{fig:soil_raster} displays the soil classification raster for the study area with fire point locations overlaid.
 
 \begin{figure}[H]
@@ -403,7 +448,7 @@ Figure~\ref{fig:soil_raster} displays the soil classification raster for the stu
 
 \textbf{Raster insights:} The soil map reveals distinct zones corresponding to major landscape features. Northern coastal areas exhibit richer soils with higher organic content, while southern regions transition to arid soils with low organic matter. Fire points concentrate in areas with moderate soil fertility that support combustible vegetation.
 
-\subsection{Univariate Analysis}
+\subsection*{Univariate Analysis}
 Figure~\ref{fig:soil_univariate} presents the distribution of soil properties at fire locations.
 
 \begin{figure}[H]
@@ -415,29 +460,86 @@ Figure~\ref{fig:soil_univariate} presents the distribution of soil properties at
 
 \textbf{Univariate insights:} Soil pH at fire locations shows a slightly alkaline distribution typical of Mediterranean soils. Sand content varies widely, with fires occurring across different soil textures. Organic carbon content is generally low to moderate, reflecting the semi-arid climate influence on soil development.
 
-\subsection{Bivariate Analysis}
-Figure~\ref{fig:soil_bivariate} shows the correlation between soil properties and their relationship with fire occurrence.
+\subsection*{Bivariate Analysis - Correlation Heatmap}
+Figure~\ref{fig:soil_heatmap} shows the correlation matrix between soil properties.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{ressources/chapter1/soil_bivariate.png}
-    \caption{Correlation matrix and relationships between soil properties}
-    \label{fig:soil_bivariate}
+    \includegraphics[width=0.85\textwidth]{ressources/chapter1/soil_heatmap.png}
+    \caption{Correlation heatmap of soil properties}
+    \label{fig:soil_heatmap}
 \end{figure}
 
-\textbf{Bivariate insights:} Negative correlation exists between sand and clay fractions as expected from soil texture composition. Organic carbon correlates moderately with soil moisture retention capacity. These relationships indicate that soil properties influence vegetation type and density, indirectly affecting fire susceptibility.
+\textbf{Correlation insights:} The correlation analysis reveals strong relationships between soil properties. The top 10 correlated pairs are:
+\begin{table}[h]
+\centering
+\caption{Correlation Coefficients Between Soil Properties}
+\label{tab:soil_correlations}
+\begin{tabular}{llr}
+\toprule
+\textbf{Variable 1} & \textbf{Variable 2} & \textbf{Correlation} \\
+\midrule
+CEC\_EFF & TEB & 0.947 \\
+ORG\_CARBON & TOTAL\_N & 0.924 \\
+CLAY & REF\_BULK & 0.924 \\
+TOTAL\_N & CEC\_SOIL & 0.883 \\
+ORG\_CARBON & CEC\_SOIL & 0.872 \\
+CLAY & TEXTURE\_USDA & $-0.861$ \\
+PH\_WATER & BSAT & 0.813 \\
+ESP & ELEC\_COND & 0.800 \\
+BULK & PH\_WATER & 0.799 \\
+SAND & TEXTURE\_USDA & 0.793 \\
+\bottomrule
+\end{tabular}
+\end{table}
 
-\subsection{Spatial Analysis}
-Figure~\ref{fig:soil_spatial} presents the spatial distribution of soil types relative to fire occurrence patterns.
+These relationships indicate that soil properties influence vegetation type and density, indirectly affecting fire susceptibility. Notably, organic carbon correlates strongly with nitrogen content and cation exchange capacity, reflecting soil fertility patterns.
+
+\subsection*{Bivariate Analysis - Scatter Plots}
+Figure~\ref{fig:soil_scatter} shows pairwise scatter plots between highly correlated soil properties.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{ressources/chapter1/soil_spatial.png}
-    \caption{Spatial distribution of soil types and fire density}
-    \label{fig:soil_spatial}
+    \includegraphics[width=0.85\textwidth]{ressources/chapter1/soil_scatter.png}
+    \caption{Scatter plots of top correlated soil property pairs}
+    \label{fig:soil_scatter}
 \end{figure}
 
-\textbf{Spatial insights:} Fire hotspots align with transitional soil zones between fertile coastal soils and arid interior soils. These transition zones support shrubland and grassland vegetation that provides fuel for fires. The spatial analysis suggests soil type is a secondary predictor, influencing fire risk through its effect on vegetation patterns.
+\textbf{Scatter insights:} The scatter plots visualize the linear relationships between the most strongly correlated soil properties. The CEC\_EFF vs TEB relationship shows a near-perfect positive correlation, while CLAY vs TEXTURE\_USDA exhibits a strong negative relationship reflecting the inverse relationship between clay content and texture classification.
+
+\subsection*{Bivariate Analysis - Q-Q Plots}
+Figure~\ref{fig:soil_qq} presents Q-Q plots to assess the normality of soil property distributions.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{ressources/chapter1/soil_qq_plots.png}
+    \caption{Q-Q plots for normality assessment of soil properties}
+    \label{fig:soil_qq}
+\end{figure}
+
+\textbf{Q-Q insights:} The Q-Q plots reveal that most soil properties deviate from normal distributions, showing heavy tails and skewness. This non-normality justifies the use of robust preprocessing techniques and suggests that non-parametric methods may be more appropriate for modeling.
+
+\subsection*{Categorical Analysis}
+Figure~\ref{fig:soil_texture_usda} and Figure~\ref{fig:soil_texture_soter} present the distribution of categorical soil texture classifications.
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{ressources/chapter1/soil_texture_usda.png}
+        \caption{Distribution of TEXTURE\_USDA classes}
+        \label{fig:soil_texture_usda}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{ressources/chapter1/soil_texture_soter.png}
+        \caption{Distribution of TEXTURE\_SOTER classes}
+        \label{fig:soil_texture_soter}
+    \end{minipage}
+\end{figure}
+
+\textbf{Categorical insights:} The TEXTURE\_USDA classification shows that loam-based textures (classes 5--9) dominate the dataset, with sandy loam and loam being the most prevalent categories. The TEXTURE\_SOTER classification reveals a similar pattern with medium-textured soils being most common. These texture distributions reflect the Mediterranean soil characteristics of the study region, where moderate clay and sand content support diverse vegetation types that influence fire susceptibility.
 
 \section{Summary}
 The exploratory analysis reveals:
