@@ -1,0 +1,123 @@
+% Appendix: Repository Structure
+\chapter*{Appendix A: Project Repository Structure}
+\addcontentsline{toc}{chapter}{Appendix A: Project Repository Structure}
+
+This appendix provides a detailed overview of the project repository organization, including all directories, notebooks, scripts, and datasets used throughout the analysis.
+
+\section*{Repository Overview}
+The project repository is organized into five main directories, each serving a specific purpose in the data mining pipeline:
+
+\begin{itemize}
+    \item \texttt{analysis/} - Jupyter notebooks for exploratory data analysis and modeling
+    \item \texttt{dataset/} - Raw and processed datasets (excluded from version control)
+    \item \texttt{models/} - Custom implementations of machine learning algorithms
+    \item \texttt{results/} - Generated outputs, processed datasets, and evaluation reports
+    \item \texttt{scripts/} - Utility scripts for data download and verification
+\end{itemize}
+
+\section*{Complete Directory Structure}
+
+\begin{verbatim}
+project-root/
+|-- analysis/                    # Jupyter notebooks for data analysis
+|   |-- climate.ipynb           # Climate data processing & EDA
+|   |-- dbscan.ipynb            # DBSCAN clustering analysis
+|   |-- decision_tree.ipynb     # Decision Tree model analysis
+|   |-- elevation.ipynb         # Elevation feature extraction
+|   |-- feature_engineering.ipynb # Feature engineering pipeline
+|   |-- fire.ipynb              # Fire dataset processing
+|   |-- kmeans.ipynb            # K-Means clustering analysis
+|   |-- knn.ipynb               # KNN model analysis
+|   |-- landcover.ipynb         # Land cover analysis
+|   |-- merge.ipynb             # Dataset integration
+|   |-- model_training.ipynb    # Model training & evaluation
+|   |-- random_forest.ipynb     # Random Forest model analysis
+|   |-- soil.ipynb              # Soil properties extraction
+|   `-- undersampling.ipynb     # Data balancing techniques
+|
+|-- dataset/                     # Raw datasets (gitignored - large files)
+|   |-- climate_dataset/        # CHIRPS & TerraClimate rasters
+|   |   |-- prec/               # Precipitation data
+|   |   |-- tmax/               # Max temperature data
+|   |   `-- tmin/               # Min temperature data
+|   |-- elevation_dataset/      # GMTED2010 elevation data
+|   |   |-- be15_grd/           # Raw elevation grid
+|   |   `-- elevation_grd/      # Processed elevation grid
+|   |-- fire_dataset/           # FIRMS fire points (CSV)
+|   |   |-- algeria.csv
+|   |   |-- fires.csv
+|   |   `-- tunisia.csv
+|   |-- land_cover_dataset/     # FAO land cover shapefiles
+|   |   |-- algeria/
+|   |   `-- tunisia/
+|   `-- soil_dataset/           # HWSD v2.0 soil data
+|       |-- HWSD2.bil
+|       |-- HWSD2.hdr
+|       |-- HWSD2.mdb
+|       |-- HWSD2.prj
+|       `-- HWSD2.stx
+|
+|-- models/                      # Custom ML implementations
+|   |-- __init__.py
+|   |-- dbscan.py               # DBSCAN clustering algorithm
+|   |-- decision_tree.py        # Decision Tree (CART algorithm)
+|   |-- kmeans.py               # K-Means clustering algorithm
+|   |-- knn.py                  # K-Nearest Neighbors classifier
+|   `-- random_forest.py        # Random Forest ensemble
+|
+|-- results/                     # Output datasets & reports
+|
+|-- scripts/                     # Utility scripts
+|   |-- download_data.py        # Dataset download helper
+|   `-- verify_data.py          # Dataset verification tool
+|
+|-- .gitignore                   # Git ignore rules
+`-- requirements.txt             # Python dependencies
+\end{verbatim}
+
+\section*{Directory Descriptions}
+
+\subsection*{Analysis Directory}
+The \texttt{analysis/} directory contains all Jupyter notebooks used for data exploration, preprocessing, and modeling. Each notebook corresponds to a specific phase of the project:
+
+\begin{itemize}
+    \item \textbf{Data Processing Notebooks}: \texttt{climate.ipynb}, \texttt{elevation.ipynb}, \texttt{fire.ipynb}, \texttt{landcover.ipynb}, \texttt{soil.ipynb} handle individual dataset preprocessing and exploratory analysis
+    \item \textbf{Integration Notebooks}: \texttt{merge.ipynb} combines all processed datasets, \texttt{feature\_engineering.ipynb} creates derived features, \texttt{undersampling.ipynb} addresses class imbalance
+    \item \textbf{Supervised Learning Notebooks}: \texttt{knn.ipynb}, \texttt{decision\_tree.ipynb}, \texttt{random\_forest.ipynb} implement and evaluate classification models
+    \item \textbf{Unsupervised Learning Notebooks}: \texttt{kmeans.ipynb}, \texttt{dbscan.ipynb} perform clustering analysis
+    \item \textbf{Model Training}: \texttt{model\_training.ipynb} provides comprehensive model comparison and evaluation
+\end{itemize}
+
+\subsection*{Dataset Directory}
+The \texttt{dataset/} directory stores all raw and intermediate datasets. Due to large file sizes, this directory is excluded from version control via \texttt{.gitignore}:
+
+\begin{itemize}
+    \item \textbf{climate\_dataset/}: Contains CHIRPS precipitation data and TerraClimate temperature rasters organized by variable type
+    \item \textbf{elevation\_dataset/}: Stores GMTED2010 digital elevation model data in both raw and processed formats
+    \item \textbf{fire\_dataset/}: Contains FIRMS (Fire Information for Resource Management System) fire detection data in CSV format for Algeria and Tunisia
+    \item \textbf{land\_cover\_dataset/}: Includes FAO land cover classification shapefiles for both countries
+    \item \textbf{soil\_dataset/}: Contains Harmonized World Soil Database (HWSD) v2.0 raster and database files
+\end{itemize}
+
+\subsection*{Models Directory}
+The \texttt{models/} directory contains custom Python implementations of machine learning algorithms:
+
+\begin{itemize}
+    \item \textbf{Supervised Learning}: \texttt{knn.py}, \texttt{decision\_tree.py}, \texttt{random\_forest.py} implement classification algorithms from scratch
+    \item \textbf{Unsupervised Learning}: \texttt{kmeans.py}, \texttt{dbscan.py} implement clustering algorithms
+    \item All implementations follow scikit-learn API conventions for consistency
+\end{itemize}
+
+\subsection*{Results Directory}
+The \texttt{results/} directory stores all outputs generated during the analysis, including processed datasets, model predictions, evaluation metrics, and visualization outputs.
+
+\subsection*{Scripts Directory}
+The \texttt{scripts/} directory contains utility scripts for data management:
+
+\begin{itemize}
+    \item \texttt{download\_data.py}: Automates the download of publicly available datasets
+    \item \texttt{verify\_data.py}: Validates dataset integrity and completeness
+\end{itemize}
+
+\section*{Dependencies}
+All required Python packages are specified in \texttt{requirements.txt}, including libraries for data manipulation (pandas, numpy), geospatial analysis (geopandas, rasterio), machine learning (scikit-learn), and visualization (matplotlib, seaborn).

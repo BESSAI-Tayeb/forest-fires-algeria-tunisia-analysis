@@ -49,6 +49,9 @@ ipython_config.py
 *~
 .DS_Store
 
+# report and backup folder
+backup/
+
 # Data files (all datasets)
 dataset
 
@@ -91,7 +94,3 @@ Desktop.ini
 *.zip
 *.tar.gz
 *.rar
-
-# report and backup folder
-report/
-backup/
