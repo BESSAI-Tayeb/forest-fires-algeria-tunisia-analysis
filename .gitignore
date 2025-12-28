@@ -49,6 +49,9 @@ ipython_config.py
 *~
 .DS_Store
 
+# report and backup folder
+backup/
+
 # Data files (all datasets)
 dataset
 
