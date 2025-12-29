@@ -73,14 +73,14 @@ Figure~\ref{fig:fire_spatial_algeria} and Figure~\ref{fig:fire_spatial_tunisia} 
     \centering
     \begin{minipage}{0.55\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{ressources/chapter1/fire_algeria.png}
+        \includegraphics[width=\textwidth]{ressources/chapter1/fire/fire_algeria.png}
         \caption{Fire detections in Algeria}
         \label{fig:fire_spatial_algeria}
     \end{minipage}
     \hfill
     \begin{minipage}{0.43\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{ressources/chapter1/fire_tunisia.png}
+        \includegraphics[width=\textwidth]{ressources/chapter1/fire/fire_tunisia.png}
         \caption{Fire detections in Tunisia}
         \label{fig:fire_spatial_tunisia}
     \end{minipage}
@@ -88,19 +88,20 @@ Figure~\ref{fig:fire_spatial_algeria} and Figure~\ref{fig:fire_spatial_tunisia} 
 
 \textbf{Spatial insights:} Fires concentrate in northern coastal regions with Mediterranean vegetation, mountainous forested areas (Atlas Mountains), and transition zones between Mediterranean and semi-arid climates. Algeria exhibits significantly more fire detections (87,446) compared to Tunisia (2,804), reflecting both country size and vegetation density differences.
 
+\newpage
 \subsection*{Univariate Analysis}
 Figure~\ref{fig:fire_univariate} presents histograms and boxplots for key fire attributes, comparing distributions between Algeria and Tunisia.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.0\textwidth]{ressources/chapter1/fire_univariate_part1.png}
+    \includegraphics[width=1.0\textwidth]{ressources/chapter1/fire/fire_univariate_part1.png}
     \caption{Distribution of Latitude, Longitude, and bright\_ti4 by country}
     \label{fig:fire_univariate}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.0\textwidth]{ressources/chapter1/fire_univariate_part2.png}
+    \includegraphics[width=1.0\textwidth]{ressources/chapter1/fire/fire_univariate_part2.png}
     \caption{Distribution of Track, acq\_time, and bright\_ti5 by country}
     \label{fig:fire_univariate}
 \end{figure}
@@ -108,7 +109,7 @@ Figure~\ref{fig:fire_univariate} presents histograms and boxplots for key fire a
 \textbf{Univariate insights:} Both countries show similar brightness temperature distributions (mean $\approx$ 320~K), indicating comparable fire intensities. Fire Radiative Power (FRP) is right-skewed with most fires being low-intensity events. Outliers in FRP represent extreme fire events requiring special attention in modeling.
 
 \newpage
-\subsection**{Fire Type Distribution}
+\subsection*{Fire Type Distribution}
 
 \noindent The \textbf{type} column classifies the heat source. Classification key : \\
 0 = Presumed vegetation fire (Retained) \\
@@ -123,7 +124,7 @@ Figure~\ref{fig:fire_univariate} presents histograms and boxplots for key fire a
     % --- First Image (Left) ---
     \begin{minipage}[b]{0.48\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{ressources/chapter1/fire_type_distribution_algeria.png}
+        \includegraphics[width=\textwidth]{ressources/chapter1/fire/fire_type_distribution_algeria.png}
         \caption{Fire type distribution}
         \label{fig:fire_type_dist}
     \end{minipage}
@@ -131,7 +132,7 @@ Figure~\ref{fig:fire_univariate} presents histograms and boxplots for key fire a
     % --- Second Image (Right) ---
     \begin{minipage}[b]{0.48\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{ressources/chapter1/fire_type_distribution_tunisia.png}
+        \includegraphics[width=\textwidth]{ressources/chapter1/fire/fire_type_distribution_tunisia.png}
         \caption{Title of second figure}
         \label{fig:second_figure_label}
     \end{minipage}
@@ -144,14 +145,14 @@ Figure~\ref{fig:fire_qq_bright} and Figure~\ref{fig:fire_qq_frp} present Q-Q plo
     \centering
     \begin{minipage}{0.48\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{ressources/chapter1/fire_qq_bright.png}
+        \includegraphics[width=\textwidth]{ressources/chapter1/fire/fire_qq_bright.png}
         \caption{Q-Q plot: Brightness}
         \label{fig:fire_qq_bright}
     \end{minipage}
     \hfill
     \begin{minipage}{0.48\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{ressources/chapter1/fire_qq_frp.png}
+        \includegraphics[width=\textwidth]{ressources/chapter1/fire/fire_qq_frp.png}
         \caption{Q-Q plot: FRP}
         \label{fig:fire_qq_frp}
     \end{minipage}
@@ -164,7 +165,7 @@ Figure~\ref{fig:fire_heatmap} displays the correlation matrix between fire attri
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{ressources/chapter1/fire_heatmap.png}
+    \includegraphics[width=0.65\textwidth]{ressources/chapter1/fire/fire_heatmap.png}
     \caption{Correlation heatmap of fire variables}
     \label{fig:fire_heatmap}
 \end{figure}
@@ -176,7 +177,7 @@ Figure~\ref{fig:fire_scatter} shows pairwise scatter plots between selected fire
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{ressources/chapter1/fire_scatter.png}
+    \includegraphics[width=0.65\textwidth]{ressources/chapter1/fire/fire_scatter.png}
     \caption{Pairwise scatter plots of fire variables}
     \label{fig:fire_scatter}
 \end{figure}
@@ -190,14 +191,14 @@ Figure~\ref{fig:fire_daily} and Figure~\ref{fig:fire_weekly} show daily and week
     \centering
     \begin{minipage}{0.48\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{ressources/chapter1/fire_daily_counts.png}
+        \includegraphics[width=\textwidth]{ressources/chapter1/fire/fire_daily_counts.png}
         \caption{Daily fire counts}
         \label{fig:fire_daily}
     \end{minipage}
     \hfill
     \begin{minipage}{0.48\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{ressources/chapter1/fire_weekly_counts.png}
+        \includegraphics[width=\textwidth]{ressources/chapter1/fire/fire_weekly_counts.png}
         \caption{Weekly fire counts}
         \label{fig:fire_weekly}
     \end{minipage}
@@ -205,59 +206,49 @@ Figure~\ref{fig:fire_daily} and Figure~\ref{fig:fire_weekly} show daily and week
 
 \textbf{Temporal insights:} Daily counts show short-term variability and potential sequencing of events, while weekly aggregations smooth noise and clearly reveal the seasonal peak in summer months (June--September), with August typically the busiest month.
 
+\newpage
 \section{Land Cover Dataset}
 Land cover data from the FAO Global Land Cover Share database classifies surface types including forests, shrublands, grasslands, croplands, urban areas, bare land, and water bodies.
 
 \textbf{Key attributes} include: Land cover class (categorical), coverage percentage, and geographic polygons defining each land cover zone.
 
-\subsection*{Raster Visualization}
-Figure~\ref{fig:landcover_raster} displays the land cover classification map for Algeria and Tunisia with fire point locations overlaid.
+\subsection*{Land Cover Distribution}
+Figure~\ref{fig:landcover_distribution_pie} displays pie charts illustrating the proportional composition of land cover classes.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{ressources/chapter1/landcover_raster.png}
-    \caption{Land cover classification map with fire point overlay}
-    \label{fig:landcover_raster}
+    \includegraphics[width=1.0\textwidth]{ressources/chapter1/landcover/landcover_distribution.png}
+    \caption{Land cover proportions (pie charts) for Algeria and Tunisia}
+    \label{fig:landcover_distribution_pie}
 \end{figure}
 
-\textbf{Raster insights:} The visualization reveals distinct land cover zones across the study area. Northern coastal regions exhibit dense forest and shrubland coverage, while southern areas transition to sparse vegetation and bare land. Fire points cluster predominantly in vegetated zones, confirming the relationship between fuel availability and fire occurrence.
+\textbf{Distribution insights:} Both countries are dominated by arid land cover types, with Bare Land, Sandy Desert, and Rocky Desert comprising the vast majority of polygons—reflecting the Saharan influence across the region. Algeria exhibits a greater diversity of land cover classes due to its larger territory spanning multiple bioclimatic zones. Vegetated classes (forests, shrublands, croplands) represent a small but ecologically significant fraction concentrated in the northern Mediterranean belt.
 
-\subsection*{Univariate Analysis}
-Figure~\ref{fig:landcover_univariate} presents the distribution of fire points across different land cover classes.
+\subsection*{Comparative Analysis}
+Figure~\ref{fig:landcover_comparative} presents a direct comparison of land cover polygon counts between Algeria and Tunisia for common land cover types with significant representation.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{ressources/chapter1/landcover_univariate.png}
-    \caption{Distribution of fire occurrences by land cover class}
-    \label{fig:landcover_univariate}
+    \includegraphics[width=1.0\textwidth]{ressources/chapter1/landcover/landcover_comparative.png}
+    \caption{Land cover comparison between Algeria and Tunisia}
+    \label{fig:landcover_comparative}
 \end{figure}
 
-\textbf{Univariate insights:} Forests and shrublands account for the majority of fire detections, reflecting higher fuel loads in these vegetation types. Agricultural lands show moderate fire activity, often associated with crop residue burning. Urban and water bodies exhibit negligible fire occurrence as expected.
+\textbf{Comparative insights:} Algeria consistently shows higher polygon counts across all shared land cover categories, primarily due to its larger geographic extent (approximately 2.4 million km² vs. 164,000 km²). Desert-type classifications dominate both countries, but the relative proportions differ—Tunisia exhibits a higher percentage of steppe and agricultural lands relative to pure desert, reflecting its more northerly position and narrower Saharan footprint. The comparison highlights that while absolute counts favor Algeria, Tunisia's land cover composition is proportionally more diverse.
 
-\subsection*{Bivariate Analysis}
-Figure~\ref{fig:landcover_bivariate} shows the relationship between land cover types and fire intensity metrics.
+\subsection*{Geographic Visualization}
+Figure~\ref{fig:landcover_map} displays the spatial distribution of land cover classes across Algeria and Tunisia side by side, using realistic colors that reflect the natural appearance of each land cover type.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{ressources/chapter1/landcover_bivariate.png}
-    \caption{Fire intensity (FRP) distribution across land cover classes}
-    \label{fig:landcover_bivariate}
+    \includegraphics[width=1.0\textwidth]{ressources/chapter1/landcover/landcover_visualization.png}
+    \caption{Land cover distribution maps of Algeria and Tunisia}
+    \label{fig:landcover_map}
 \end{figure}
 
-\textbf{Bivariate insights:} Forest fires tend to exhibit higher Fire Radiative Power (FRP) values compared to grassland or agricultural fires, indicating more intense burning in wooded areas. Shrubland fires show intermediate intensity levels, consistent with moderate fuel density.
+\textbf{Geographic insights:} The maps reveal clear latitudinal zonation in land cover distribution. Northern regions along the Mediterranean coast display concentrated vegetation—forests, shrublands, and agricultural areas—corresponding to higher rainfall and milder temperatures. The transition zone features steppe and sparse vegetation before giving way to the dominant sandy and rocky desert landscapes of the Sahara in the south. This north-south gradient directly influences fire risk patterns, with the vegetated northern belt being the primary zone of fire occurrence.
 
-\subsection*{Spatial Analysis}
-Figure~\ref{fig:landcover_spatial} presents the spatial distribution of land cover classes relative to fire hotspots.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.85\textwidth]{ressources/chapter1/landcover_spatial.png}
-    \caption{Spatial distribution of land cover and fire density}
-    \label{fig:landcover_spatial}
-\end{figure}
-
-\textbf{Spatial insights:} Fire hotspots align with the Mediterranean vegetation belt along the northern coast and Atlas Mountain foothills. The spatial analysis confirms that land cover type is a strong predictor of fire location, with clear boundaries between high-risk vegetated zones and low-risk arid regions.
-
+\newpage
 \section{Climate Dataset}
 Climate data comes from CHIRPS (precipitation) and TerraClimate (temperature) with monthly resolution at approximately 4~km spatial resolution.
 
@@ -268,7 +259,7 @@ Figure~\ref{fig:climate_raster} displays the climate raster layers (precipitatio
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{ressources/chapter1/climate_raster.png}
+    \includegraphics[width=0.85\textwidth]{ressources/chapter1/climate/climate.png}
     \caption{Climate variables (precipitation and temperature) with fire point overlay}
     \label{fig:climate_raster}
 \end{figure}
@@ -280,7 +271,7 @@ Figure~\ref{fig:climate_univariate} presents histograms and boxplots for climate
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{ressources/chapter1/climate_univariate.png}
+    \includegraphics[width=0.85\textwidth]{ressources/chapter1/climate/climate_univariate.png}
     \caption{Distribution of climate variables at fire locations}
     \label{fig:climate_univariate}
 \end{figure}
@@ -292,7 +283,7 @@ Figure~\ref{fig:climate_bivariate} shows the correlation between climate variabl
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{ressources/chapter1/climate_bivariate.png}
+    \includegraphics[width=0.85\textwidth]{ressources/chapter1/climate/climate_bivariate.png}
     \caption{Correlation matrix and scatter plots of climate variables}
     \label{fig:climate_bivariate}
 \end{figure}
@@ -304,7 +295,7 @@ Figure~\ref{fig:climate_temporal} presents the seasonal patterns of climate vari
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{ressources/chapter1/climate_temporal.png}
+    \includegraphics[width=0.85\textwidth]{ressources/chapter1/climate/climate_temporal.png}
     \caption{Monthly climate patterns and fire occurrence seasonality}
     \label{fig:climate_temporal}
 \end{figure}
@@ -319,19 +310,19 @@ Elevation data from GMTED2010 provides a Digital Elevation Model at 15 arc-secon
 
 \subsection*{Derived Terrain Features}
 From the raw elevation raster, we compute three derived terrain features that characterize the topographic conditions at each fire location:
-
+\\ \\
 \textbf{Slope} measures the steepness of the terrain in degrees. It is computed using the gradient of the elevation surface:
 \[
 \text{Slope} = \arctan\left(\sqrt{\left(\frac{\partial z}{\partial x}\right)^2 + \left(\frac{\partial z}{\partial y}\right)^2}\right) \times \frac{180}{\pi}
 \]
 where $\frac{\partial z}{\partial x}$ and $\frac{\partial z}{\partial y}$ are the elevation gradients in the x and y directions, computed using NumPy's gradient function with a cell size of approximately 450~m (corresponding to the 15 arc-second resolution at the equator).
-
+\\ \\
 \textbf{Aspect} represents the compass direction that a slope faces, measured in degrees from North (0°). It is calculated as:
 \[
 \text{Aspect} = \left(90 - \arctan2\left(-\frac{\partial z}{\partial y}, \frac{\partial z}{\partial x}\right) \times \frac{180}{\pi}\right) \mod 360
 \]
 This transformation converts the mathematical angle to a compass bearing where 0° = North, 90° = East, 180° = South, and 270° = West.
-
+\\ \\
 \textbf{Terrain Roughness Index (TRI)} quantifies the heterogeneity of the terrain surface. It is computed using a 3×3 moving window centered on each cell:
 \[
 \text{TRI} = \sqrt{\frac{1}{n}\sum_{i=1}^{n}(z_i - z_{\text{center}})^2}
@@ -343,7 +334,7 @@ Figure~\ref{fig:elevation_raster} displays the elevation raster clipped to the s
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{ressources/chapter1/elevation_raster.png}
+    \includegraphics[width=0.85\textwidth]{ressources/chapter1/elevation/elevation_raster.png}
     \caption{Digital Elevation Model with fire point overlay}
     \label{fig:elevation_raster}
 \end{figure}
@@ -355,7 +346,7 @@ Figure~\ref{fig:elevation_univariate} presents histograms, boxplots, and Q-Q plo
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{ressources/chapter1/elevation_univariate.png}
+    \includegraphics[width=1.0\textwidth]{ressources/chapter1/elevation/elevation_univariate.png}
     \caption{Distribution of terrain features (elevation, slope, aspect, roughness) at fire locations}
     \label{fig:elevation_univariate}
 \end{figure}
@@ -363,29 +354,27 @@ Figure~\ref{fig:elevation_univariate} presents histograms, boxplots, and Q-Q plo
 \textbf{Univariate insights:} Elevation at fire locations shows a bimodal distribution with peaks at low coastal elevations and mid-mountain elevations. Slope values are predominantly moderate (5--15°), while aspect shows relatively uniform distribution with slight preference for south-facing slopes. Terrain roughness values indicate fires occur in moderately complex terrain.
 
 \subsection*{Bivariate Analysis}
-Figure~\ref{fig:elevation_bivariate} shows the correlation between terrain features and their relationship with fire class.
+Figure~\ref{fig:elevation_heatmap} presents the correlation heatmap between terrain features, while Figure~\ref{fig:elevation_scatter} shows pairwise scatter plots to visualize their relationships.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{ressources/chapter1/elevation_bivariate.png}
-    \caption{Correlation matrix and pairwise scatter plots of terrain features}
-    \label{fig:elevation_bivariate}
+    \includegraphics[width=0.85\textwidth]{ressources/chapter1/elevation/elevation_heatmap.png}
+    \caption{Correlation heatmap of terrain features}
+    \label{fig:elevation_heatmap}
 \end{figure}
 
-\textbf{Bivariate insights:} Strong positive correlation exists between slope and terrain roughness, as expected from their computational relationship. Elevation shows moderate correlation with slope in mountainous areas. The pairwise plots reveal distinct clustering patterns that may inform terrain-based fire risk classification.
-
-\subsection*{Spatial Analysis}
-Figure~\ref{fig:elevation_spatial} presents the spatial relationship between topographic features and fire density.
+\textbf{Heatmap insights:} The correlation matrix reveals strong positive correlation between slope and terrain roughness, as expected from their computational relationship. Elevation shows moderate correlation with slope in mountainous areas. Aspect exhibits weak correlation with other terrain variables, confirming its independence as a directional measure.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{ressources/chapter1/elevation_spatial.png}
-    \caption{Terrain features by fire class comparison}
-    \label{fig:elevation_spatial}
+    \includegraphics[width=0.85\textwidth]{ressources/chapter1/elevation/elevation_scatter.png}
+    \caption{Pairwise scatter plots of terrain features}
+    \label{fig:elevation_scatter}
 \end{figure}
 
-\textbf{Spatial insights:} Fire density is highest in the transition zones between lowlands and mountain ranges, where slope and aspect create microclimates favorable to both vegetation growth and fire spread. South-facing slopes show elevated fire risk due to increased solar radiation and drier conditions.
+\textbf{Scatter insights:} The pairwise plots reveal distinct clustering patterns between terrain variables. The elevation-slope relationship shows increased variability at higher elevations corresponding to mountainous terrain. These patterns may inform terrain-based fire risk classification.
 
+\newpage
 \section{Soil Dataset}
 Soil data from the Harmonized World Soil Database v2.0 (HWSD2) provides properties including organic carbon, nitrogen, pH, and texture fractions (sand, clay, silt).
 
@@ -441,7 +430,7 @@ Figure~\ref{fig:soil_raster} displays the soil classification raster for the stu
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{ressources/chapter1/soil_raster.png}
+    \includegraphics[width=0.85\textwidth]{ressources/chapter1/soil/soil_raster.png}
     \caption{Soil classification map with fire point overlay}
     \label{fig:soil_raster}
 \end{figure}
@@ -453,7 +442,7 @@ Figure~\ref{fig:soil_univariate} presents the distribution of soil properties at
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{ressources/chapter1/soil_univariate.png}
+    \includegraphics[width=0.85\textwidth]{ressources/chapter1/soil/soil_univariate.png}
     \caption{Distribution of soil properties at fire locations}
     \label{fig:soil_univariate}
 \end{figure}
@@ -465,7 +454,7 @@ Figure~\ref{fig:soil_heatmap} shows the correlation matrix between soil properti
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{ressources/chapter1/soil_heatmap.png}
+    \includegraphics[width=0.85\textwidth]{ressources/chapter1/soil/soil_heatmap.png}
     \caption{Correlation heatmap of soil properties}
     \label{fig:soil_heatmap}
 \end{figure}
@@ -500,7 +489,7 @@ Figure~\ref{fig:soil_scatter} shows pairwise scatter plots between highly correl
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{ressources/chapter1/soil_scatter.png}
+    \includegraphics[width=1.0\textwidth]{ressources/chapter1/soil/soil_scatter.png}
     \caption{Scatter plots of top correlated soil property pairs}
     \label{fig:soil_scatter}
 \end{figure}
@@ -512,7 +501,7 @@ Figure~\ref{fig:soil_qq} presents Q-Q plots to assess the normality of soil prop
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{ressources/chapter1/soil_qq_plots.png}
+    \includegraphics[width=0.95\textwidth]{ressources/chapter1/soil/soil_qq_plots.png}
     \caption{Q-Q plots for normality assessment of soil properties}
     \label{fig:soil_qq}
 \end{figure}
@@ -524,16 +513,16 @@ Figure~\ref{fig:soil_texture_usda} and Figure~\ref{fig:soil_texture_soter} prese
 
 \begin{figure}[H]
     \centering
-    \begin{minipage}{0.48\textwidth}
+    \begin{minipage}{0.49\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{ressources/chapter1/soil_texture_usda.png}
+        \includegraphics[width=\textwidth]{ressources/chapter1/soil/soil_texture_usda.png}
         \caption{Distribution of TEXTURE\_USDA classes}
         \label{fig:soil_texture_usda}
     \end{minipage}
     \hfill
-    \begin{minipage}{0.48\textwidth}
+    \begin{minipage}{0.49\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{ressources/chapter1/soil_texture_soter.png}
+        \includegraphics[width=\textwidth]{ressources/chapter1/soil/soil_texture_soter.png}
         \caption{Distribution of TEXTURE\_SOTER classes}
         \label{fig:soil_texture_soter}
     \end{minipage}
