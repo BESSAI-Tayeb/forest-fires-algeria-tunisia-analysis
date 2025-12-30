@@ -189,19 +189,16 @@ Figure~\ref{fig:fire_daily} and Figure~\ref{fig:fire_weekly} show daily and week
 
 \begin{figure}[H]
     \centering
-    \begin{minipage}{0.48\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{ressources/chapter1/fire/fire_daily_counts.png}
-        \caption{Daily fire counts}
-        \label{fig:fire_daily}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.48\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{ressources/chapter1/fire/fire_weekly_counts.png}
-        \caption{Weekly fire counts}
-        \label{fig:fire_weekly}
-    \end{minipage}
+    \includegraphics[width=1.0\textwidth]{ressources/chapter1/fire/fire_daily_counts.png}
+    \caption{Daily fire counts}
+    \label{fig:fire_daily}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{ressources/chapter1/fire/fire_weekly_counts.png}
+    \caption{Weekly fire counts}
+    \label{fig:fire_weekly}
 \end{figure}
 
 \textbf{Temporal insights:} Daily counts show short-term variability and potential sequencing of events, while weekly aggregations smooth noise and clearly reveal the seasonal peak in summer months (June--September), with August typically the busiest month.
@@ -255,52 +252,60 @@ Climate data comes from CHIRPS (precipitation) and TerraClimate (temperature) wi
 \textbf{Variables:} Precipitation (mm/month), Maximum temperature (°C), Minimum temperature (°C).
 
 \subsection*{Raster Visualization}
+The spatial distribution of climate variables reveals distinct geographic patterns across Algeria and Tunisia.
+
 Figure~\ref{fig:climate_raster} displays the climate raster layers (precipitation and temperature) for the study region with fire locations overlaid.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{ressources/chapter1/climate/climate.png}
-    \caption{Climate variables (precipitation and temperature) with fire point overlay}
+    \includegraphics[width=0.85\textwidth]{ressources/chapter1/climate/climate_algeria_tunisia.png}
+    \caption{Climate variables (precipitation and temperature) with fire point overlay for Algeria and Tunisia}
     \label{fig:climate_raster}
 \end{figure}
 
-\textbf{Raster insights:} The climate rasters reveal a strong north-south gradient, with higher precipitation along the Mediterranean coast and increasing aridity toward the Sahara. Temperature patterns show inverse gradients during summer months. Fire points concentrate in regions with moderate precipitation—sufficient to support vegetation but prone to seasonal drought.
+\textbf{Raster insights:} The climate rasters reveal a strong north-south gradient, with higher precipitation concentrated along the Mediterranean coast and increasing aridity toward the Sahara. Temperature patterns show inverse gradients during summer months, with cooler coastal areas and hotter interior regions. Fire points predominantly concentrate in regions with moderate precipitation—areas that receive sufficient moisture to support combustible vegetation but remain prone to seasonal drought stress. This spatial pattern confirms that the transition zone between Mediterranean and semi-arid climates represents the highest fire risk area.
 
 \subsection*{Univariate Analysis}
+The individual distributions of climate variables at fire locations provide insights into the environmental conditions conducive to fire occurrence.
+
 Figure~\ref{fig:climate_univariate} presents histograms and boxplots for climate variables at fire locations.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.85\textwidth]{ressources/chapter1/climate/climate_univariate.png}
-    \caption{Distribution of climate variables at fire locations}
+    \caption{Distribution of climate variables (precipitation, maximum temperature, minimum temperature) at fire locations}
     \label{fig:climate_univariate}
 \end{figure}
 
-\textbf{Univariate insights:} Maximum temperature at fire locations shows a right-skewed distribution with most fires occurring at temperatures above 30°C. Precipitation values are predominantly low during fire events, confirming drought as a key fire driver. The distributions highlight the Mediterranean climate signature of hot, dry summers.
+\textbf{Univariate insights:} Maximum temperature at fire locations shows a right-skewed distribution with the majority of fires occurring at temperatures above 30°C, with peaks reaching 35--40°C during summer months. Precipitation values are predominantly low during fire events, with most observations below 50~mm/month, confirming that drought conditions are a key fire driver. Minimum temperature distributions indicate that fires rarely occur during cold periods, suggesting that sustained warmth is necessary for vegetation drying. The distributions collectively highlight the Mediterranean climate signature of hot, dry summers as the primary fire season.
 
 \subsection*{Bivariate Analysis}
+The relationships between climate variables reveal important interactions that influence fire occurrence patterns.
+
 Figure~\ref{fig:climate_bivariate} shows the correlation between climate variables and their relationship with fire occurrence.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.85\textwidth]{ressources/chapter1/climate/climate_bivariate.png}
-    \caption{Correlation matrix and scatter plots of climate variables}
+    \caption{Correlation heatmap and scatter plots showing relationships between precipitation, maximum temperature, and minimum temperature}
     \label{fig:climate_bivariate}
 \end{figure}
 
-\textbf{Bivariate insights:} Strong negative correlation exists between precipitation and maximum temperature, typical of Mediterranean climates. Fire occurrence correlates positively with temperature and negatively with precipitation, validating the drought-fire relationship. These correlations support the derivation of a drought index as a composite predictor.
+\textbf{Bivariate insights:} Strong negative correlation exists between precipitation and maximum temperature (r $\approx$ -0.6), which is characteristic of Mediterranean climates where summer months bring high temperatures and minimal rainfall. Fire occurrence correlates positively with temperature and negatively with precipitation, validating the drought-fire relationship hypothesis. The correlation matrix reveals that maximum and minimum temperatures are highly correlated, suggesting consistent temperature regimes across day-night cycles during fire-prone periods. These strong correlations support the derivation of a composite drought index as a predictor, combining temperature and precipitation deficit to capture the synergistic effect of heat and aridity on fire risk.
 
 \subsection*{Temporal Analysis}
+The seasonal evolution of climate variables demonstrates clear temporal patterns that align with fire occurrence cycles.
+
 Figure~\ref{fig:climate_temporal} presents the seasonal patterns of climate variables and their alignment with fire occurrence.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.85\textwidth]{ressources/chapter1/climate/climate_temporal.png}
-    \caption{Monthly climate patterns and fire occurrence seasonality}
+    \caption{Time series showing monthly variations in precipitation, temperature, and their relationship with fire occurrence throughout the year}
     \label{fig:climate_temporal}
 \end{figure}
 
-\textbf{Temporal insights:} Fire occurrence peaks during June--September, coinciding with maximum temperatures and minimum precipitation. The temporal alignment between climate extremes and fire activity confirms that seasonal drought conditions are the primary climate driver of fire risk in the study region.
+\textbf{Temporal insights:} Fire occurrence shows a pronounced peak during June--September, coinciding precisely with the period of maximum temperatures (exceeding 35°C) and minimum precipitation (often below 10~mm/month). This temporal alignment between climate extremes and fire activity confirms that seasonal drought conditions are the primary climate driver of fire risk in the study region. The lag between temperature rise in spring and fire peak in summer suggests that cumulative moisture deficit, rather than instantaneous conditions, controls fire susceptibility. Winter months (December--February) show minimal fire activity despite moderate temperatures, due to adequate precipitation that maintains high fuel moisture content. This clear seasonality enables predictive modeling based on climate forecasts.
 
 \newpage
 \section{Elevation Dataset}
