@@ -258,7 +258,7 @@ Figure~\ref{fig:climate_raster} displays the climate raster layers (precipitatio
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{ressources/chapter1/climate/climate_algeria_tunisia.png}
+    \includegraphics[width=1.0\textwidth]{ressources/chapter1/climate/climate_algeria_tunisia.png}
     \caption{Climate variables (precipitation and temperature) with fire point overlay for Algeria and Tunisia}
     \label{fig:climate_raster}
 \end{figure}
@@ -272,7 +272,7 @@ Figure~\ref{fig:climate_univariate} presents histograms and boxplots for climate
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{ressources/chapter1/climate/climate_univariate.png}
+    \includegraphics[width=1.0\textwidth]{ressources/chapter1/climate/climate_univariate.png}
     \caption{Distribution of climate variables (precipitation, maximum temperature, minimum temperature) at fire locations}
     \label{fig:climate_univariate}
 \end{figure}
@@ -282,16 +282,27 @@ Figure~\ref{fig:climate_univariate} presents histograms and boxplots for climate
 \subsection*{Bivariate Analysis}
 The relationships between climate variables reveal important interactions that influence fire occurrence patterns.
 
-Figure~\ref{fig:climate_bivariate} shows the correlation between climate variables and their relationship with fire occurrence.
+Figure~\ref{fig:climate_scatter} shows the scatter plot between precipitation and maximum temperature.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{ressources/chapter1/climate/climate_bivariate.png}
-    \caption{Correlation heatmap and scatter plots showing relationships between precipitation, maximum temperature, and minimum temperature}
-    \label{fig:climate_bivariate}
+    \includegraphics[width=1.0\textwidth]{ressources/chapter1/climate/climate_scatter.png}
+    \caption{Scatter plot showing the relationship between mean precipitation and mean maximum temperature}
+    \label{fig:climate_scatter}
 \end{figure}
 
-\textbf{Bivariate insights:} Strong negative correlation exists between precipitation and maximum temperature (r $\approx$ -0.6), which is characteristic of Mediterranean climates where summer months bring high temperatures and minimal rainfall. Fire occurrence correlates positively with temperature and negatively with precipitation, validating the drought-fire relationship hypothesis. The correlation matrix reveals that maximum and minimum temperatures are highly correlated, suggesting consistent temperature regimes across day-night cycles during fire-prone periods. These strong correlations support the derivation of a composite drought index as a predictor, combining temperature and precipitation deficit to capture the synergistic effect of heat and aridity on fire risk.
+\textbf{Scatter insights:} Strong negative correlation exists between precipitation and maximum temperature (r $\approx$ -0.6), which is characteristic of Mediterranean climates where summer months bring high temperatures and minimal rainfall. The scatter plot reveals an inverse relationship where periods of high precipitation correspond to lower maximum temperatures, and vice versa. This pattern reflects the seasonal moisture-temperature trade-off typical of Mediterranean regions, where the fire season coincides with hot, dry conditions. The relationship demonstrates clear clustering, indicating distinct climatic regimes that influence fire susceptibility.
+\\ \\
+Figure~\ref{fig:climate_qqplot} presents the Q-Q plot comparing the distributions of precipitation and maximum temperature.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{ressources/chapter1/climate/climate_qqplot.png}
+    \caption{Q-Q plot comparing standardized quantiles of precipitation versus maximum temperature distributions}
+    \label{fig:climate_qqplot}
+\end{figure}
+
+\textbf{Q-Q insights:} The Q-Q plot reveals that precipitation and maximum temperature follow markedly different distributional patterns, as evidenced by the substantial deviation from the diagonal reference line. Points below the diagonal indicate that precipitation has a more dispersed distribution with longer tails compared to temperature, while the curved pattern suggests fundamental differences in their statistical properties. This distributional dissimilarity reinforces that these variables capture complementary aspects of climate variability rather than redundant information. The divergence from linearity validates the inclusion of both variables as independent predictors in fire risk models, as they provide distinct information about environmental conditions despite their negative correlation.
 
 \subsection*{Temporal Analysis}
 The seasonal evolution of climate variables demonstrates clear temporal patterns that align with fire occurrence cycles.
@@ -300,7 +311,7 @@ Figure~\ref{fig:climate_temporal} presents the seasonal patterns of climate vari
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{ressources/chapter1/climate/climate_temporal.png}
+    \includegraphics[width=1.0\textwidth]{ressources/chapter1/climate/climate_temporal.png}
     \caption{Time series showing monthly variations in precipitation, temperature, and their relationship with fire occurrence throughout the year}
     \label{fig:climate_temporal}
 \end{figure}
