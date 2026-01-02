@@ -2,88 +2,124 @@
 \chapter{Data Preprocessing}
 
 \section{Overview}
-This chapter describes the preprocessing pipeline applied to each dataset before integration. The preprocessing decisions were guided by data quality issues identified during EDA and requirements of the machine learning algorithms.
+This chapter describes the preprocessing pipeline applied to each dataset before integration. The preprocessing decisions were guided by data quality issues identified during EDA (Chapter 1) and requirements of the machine learning algorithms.
 
 \section{Fire Dataset Preprocessing}
 
-\subsection*{Data Cleaning}
+The fire dataset from MODIS/VIIRS satellites required several cleaning steps to ensure data quality.
+
+\subsection{Fire Type Filtering}
+Only confirmed vegetation fires (type 0) were retained; presumed fires (type 2) were excluded to reduce false positives. This filtering removed ambiguous detections that could introduce noise.
+
+\subsection{Data Cleaning}
 \begin{itemize}
-    \item \textbf{Missing coordinates:} Records excluded (spatial location essential)
-    \item \textbf{Missing confidence:} Imputed with mode value
-    \item \textbf{Missing FRP:} Imputed with median grouped by satellite sensor
-    \item \textbf{Decision rationale:} Coordinate imputation would introduce spatial bias; other attributes can be reasonably estimated from similar records
+    \item \textbf{Duplicates:} Removed duplicate records (identical coordinates and timestamps)
+    \item \textbf{Missing values:} Numeric columns imputed with median; categorical columns with mode
+    \item \textbf{Latitude constraint:} Points below 33°N excluded (outside Algeria/Tunisia boundaries)
+    \item \textbf{Column selection:} Only \texttt{longitude}, \texttt{latitude}, and \texttt{class} retained
 \end{itemize}
 
-\subsection*{Outlier Treatment}
-\begin{itemize}
-    \item FRP values capped at 99th percentile (extreme values from sensor errors)
-    \item Points outside Algeria/Tunisia boundaries removed
-\end{itemize}
+\subsection{Outlier Treatment}
+Outliers detected using the IQR method (1.5$\times$IQR beyond Q1/Q3). Outlier values were replaced with the column median to preserve data volume while reducing extreme value influence.
 
-\subsection*{Feature Extraction}
-Temporal features extracted from acquisition date: Month, Season, Day/Night indicator. All timestamps standardized to UTC.
+\subsection{Negative Sample Generation}
+To create a balanced classification dataset, artificial non-fire points (class 0) were generated:
+\begin{itemize}
+    \item Random coordinates within the fire points' bounding box
+    \item 1.5$\times$ the number of fire points generated
+    \item Latitude constraint ($\geq$33°N) respected
+    \item Combined dataset shuffled with fixed random seed for reproducibility
+\end{itemize}
 
 \section{Climate Dataset Preprocessing}
 
-\subsection*{Handling Missing Data}
+WorldClim data (precipitation, maximum and minimum temperature) was processed as monthly rasters.
+
+\subsection{Raster Processing}
 \begin{itemize}
-    \item \textbf{Spatial gaps:} Bilinear interpolation from neighboring pixels
-    \item \textbf{Temporal gaps:} Linear interpolation between adjacent months
-    \item \textbf{Decision:} Climate variables are spatially and temporally autocorrelated, making interpolation valid
+    \item \textbf{Clipping:} Rasters clipped to Algeria and Tunisia boundaries using dissolved country shapefiles
+    \item \textbf{Temporal alignment:} Files matched by date pattern (\texttt{YYYY-MM}) to ensure consistent temporal coverage
+    \item \textbf{Unit conversion:} Temperature values scaled (divided by 10) to Celsius; precipitation in mm/month
 \end{itemize}
 
-\subsection*{Normalization}
-Temperature converted to Celsius; precipitation standardized to mm/month. Z-score normalization applied for modeling:
+\subsection{Feature Extraction at Fire Points}
+For each fire location, climate values were extracted using raster coordinate transformation (\texttt{rowcol}). Seasonal aggregations computed:
+\begin{itemize}
+    \item Winter (DJF), Spring (MAM), Summer (JJA), Autumn (SON)
+    \item Mean precipitation and temperature per season
+\end{itemize}
+
+\subsection{Normalization}
+Z-score normalization applied to all climate variables:
 \begin{equation}
     z = \frac{x - \mu}{\sigma}
 \end{equation}
 
-\subsection*{Derived Features}
-We created aggregated climate indices based on domain knowledge:
-\begin{itemize}
-    \item \textbf{Drought Index:} Combines precipitation deficit with temperature excess
-    \item \textbf{Summer Heat Index:} Cumulative temperature above threshold during June-August
-    \item \textbf{Decision:} These compound indices capture fire-relevant climate conditions better than raw variables
-\end{itemize}
-
 \section{Elevation Dataset Preprocessing}
 
-\subsection*{Data Quality}
-The GMTED2010 DEM required handling of NoData values at ocean and boundary areas through masking.
+The GMTED2010 DEM (15 arc-seconds, $\sim$450m resolution) was processed to extract topographic features.
 
-\subsection*{Derived Variables}
-Topographic features calculated from elevation:
+\subsection{Data Quality}
+NoData values ($-32768$) were masked during processing. The raster was clipped to a buffered bounding box around fire points for efficiency.
+
+\subsection{Derived Terrain Features}
+Four terrain variables were computed from the elevation raster:
+
 \begin{itemize}
-    \item \textbf{Slope:} Using Horn's algorithm---steeper slopes affect fire spread
-    \item \textbf{Terrain Complexity:} Local elevation standard deviation---rugged terrain affects fire behavior
-    \item \textbf{Coastal Proximity:} Distance to coastline in km---coastal regions have distinct fire patterns
+    \item \textbf{Slope:} Gradient magnitude in degrees, computed from x/y partial derivatives:
+    \begin{equation}
+        \text{slope} = \arctan\left(\sqrt{\left(\frac{\partial z}{\partial x}\right)^2 + \left(\frac{\partial z}{\partial y}\right)^2}\right) \times \frac{180}{\pi}
+    \end{equation}
+    
+    \item \textbf{Aspect:} Slope orientation (0--360°, compass bearing with 0°=North)
+    
+    \item \textbf{Terrain Roughness Index (TRI):} Root mean square deviation from neighboring cells in a 3$\times$3 window---measures local terrain variability
+    
+    \item \textbf{Roughness:} Alternative measure using local standard deviation
 \end{itemize}
+
+\subsection{Outlier Treatment and Normalization}
+IQR-based outlier replacement applied to elevation features, followed by StandardScaler normalization.
 
 \section{Soil Dataset Preprocessing}
 
-\subsection*{Missing Data}
-Missing soil properties imputed using soil class averages from the HWSD database. Records with critical missing information excluded.
+The HWSD2 database consists of an MDB file (tabular attributes) and a raster file (spatial mapping).
 
-\subsection*{Normalization}
+\subsection{Data Loading and Spatial Operations}
 \begin{itemize}
-    \item Organic carbon: Log-transformation followed by z-score normalization (skewed distribution)
-    \item Texture fractions: Already percentages, no transformation needed
-    \item pH: Direct z-score normalization (bounded scale)
+    \item Loaded \texttt{HWSD2\_LAYERS} table, filtered for D1 layer (topsoil, 0--30cm)
+    \item 22 features selected: 8 physical (COARSE, SAND, SILT, CLAY, textures, BULK) and 14 chemical (ORG\_CARBON, PH\_WATER, CEC, etc.)
+    \item Raster clipped to fire bounding box; soil unit IDs extracted at fire coordinates
 \end{itemize}
+
+\subsection{Sentinel Value Handling}
+HWSD2 uses $-9$ and similar values as missing data indicators. These sentinels were replaced with NaN before imputation.
+
+\subsection{Missing Value Imputation}
+\begin{itemize}
+    \item \textbf{Numeric columns:} Median imputation
+    \item \textbf{Categorical columns:} Mode imputation
+    \item \textbf{Duplicate handling:} All rows retained (same soil properties can map to multiple geographic units)
+\end{itemize}
+
+\subsection{Normalization}
+Z-score normalization (StandardScaler) applied to all 20 numeric soil features. Categorical texture variables (\texttt{TEXTURE\_USDA}, \texttt{TEXTURE\_SOTER}) processed separately via one-hot encoding.
+
+\subsection{One-Hot Encoding}
+The \texttt{TEXTURE\_SOTER} categorical variable was one-hot encoded to create binary columns for each texture class, enabling use in numerical algorithms.
 
 \section{Data Integration}
 
-\subsection*{Spatial Alignment}
-All datasets aligned to WGS84 (EPSG:4326). Point-to-raster extraction used bilinear interpolation for continuous variables and nearest neighbor for categorical data.
+\subsection{Spatial Alignment}
+All datasets were aligned to WGS84 (EPSG:4326). Fire points served as the spatial reference for extracting values from raster sources.
 
-\subsection*{Merging Strategy}
-The integration followed a fire-centric approach:
+\subsection{Merging Strategy}
+The integration followed a fire-centric approach with left joins:
 \begin{enumerate}
-    \item Fire point dataset as base
-    \item Extract climate values at fire locations for corresponding months
-    \item Extract elevation and topographic values at fire locations
-    \item Spatial join with soil and land cover data
-    \item Generate non-fire (negative) samples through stratified random sampling
+    \item \texttt{fires.csv} as base dataset (longitude, latitude, class)
+    \item Merge climate features on (longitude, latitude, class)
+    \item Merge elevation features on (longitude, latitude, class)
+    \item Merge soil features on (longitude, latitude, class)
 \end{enumerate}
 
 \begin{figure}[H]
@@ -93,12 +129,9 @@ The integration followed a fire-centric approach:
     \label{fig:merging_flowchart}
 \end{figure}
 
-\subsection*{Negative Sample Generation}
-\textbf{Decision:} To create a classification dataset, we generated non-fire locations through stratified random sampling across the study area, matched temporally to fire observations to maintain climate consistency. This approach avoids spatial bias that could occur from simple random sampling.
-
 \section{Final Dataset}
 
-The merged dataset structure:
+The merged dataset combines all preprocessed features:
 
 \begin{table}[H]
 \centering
@@ -108,16 +141,17 @@ The merged dataset structure:
 \hline
 \textbf{Category} & \textbf{Variables} & \textbf{Count} \\
 \hline
-Location & latitude, longitude & 2 \\
-Climate & precipitation, temperature, drought\_index & 15 \\
-Topography & elevation, slope, coastal\_proximity, terrain\_complexity & 6 \\
-Soil & organic\_carbon, nitrogen, pH, texture & 8 \\
-Target & fire (binary: 0/1) & 1 \\
+Location & longitude, latitude & 2 \\
+Climate & precipitation, tmax, tmin (seasonal aggregates) & 12+ \\
+Topography & elevation, slope, aspect, TRI, roughness & 5 \\
+Soil & physical (SAND, SILT, CLAY, BULK...) + chemical (ORG\_CARBON, PH...) & 22 \\
+Texture & one-hot encoded TEXTURE\_SOTER categories & 8+ \\
+Target & class (binary: 0=no fire, 1=fire) & 1 \\
 \hline
-\textbf{Total} & & \textbf{32+} \\
+\textbf{Total} & & \textbf{50+} \\
 \hline
 \end{tabular}
 \end{table}
 
-\subsection*{Train-Test Split}
-Data split 80\%/20\% for training/testing with stratification on the target variable to maintain class proportions. Detailed preprocessing statistics are provided in Appendix~\ref{app:preprocessing}.
+\subsection{Class Balance}
+The final dataset maintains a 1:1.5 ratio (fire:non-fire), providing sufficient negative samples while avoiding extreme imbalance that could bias classifiers toward the majority class.
