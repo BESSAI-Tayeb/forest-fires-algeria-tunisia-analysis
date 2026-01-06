@@ -15,3 +15,4 @@ seaborn
 scikit-learn
 jupyter
 gdown
+scikit-optimize
