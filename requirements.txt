@@ -17,3 +17,5 @@ scikit-learn-extra
 jupyter
 gdown
 scikit-optimize
+# optional
+# papermill
