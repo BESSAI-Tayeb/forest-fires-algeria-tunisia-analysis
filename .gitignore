@@ -51,6 +51,7 @@ ipython_config.py
 
 # report and backup folder
 backup/
+results_backup/
 
 # Data files (all datasets)
 dataset

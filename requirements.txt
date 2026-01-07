@@ -13,6 +13,7 @@ pyodbc
 matplotlib
 seaborn
 scikit-learn
+scikit-learn-extra
 jupyter
 gdown
 scikit-optimize
