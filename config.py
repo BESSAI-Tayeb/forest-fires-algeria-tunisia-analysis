@@ -27,7 +27,6 @@ DATASET_DIR = PROJECT_ROOT / 'dataset'
 FIRE_DATASET_DIR = DATASET_DIR / 'fire_dataset'
 ALGERIA_FIRES_CSV = FIRE_DATASET_DIR / 'algeria.csv'
 TUNISIA_FIRES_CSV = FIRE_DATASET_DIR / 'tunisia.csv'
-FIRES_CSV = FIRE_DATASET_DIR / 'fires.csv'
 
 # Climate dataset
 CLIMATE_DATASET_DIR = DATASET_DIR / 'climate_dataset'
@@ -59,12 +58,15 @@ RESULTS_DIR = PROJECT_ROOT / 'results'
 
 # Base data files
 RESULTS_DATA_DIR = RESULTS_DIR / 'data'
-FIRES_RESULT_CSV = RESULTS_DATA_DIR / 'fires.csv'
+FIRES_CSV = RESULTS_DATA_DIR / 'fires.csv'
+FIRES_RESULT_CSV = RESULTS_DATA_DIR / 'fires_clipped.csv'
+FIRES_WITH_ARTIFICIAL = RESULTS_DATA_DIR / 'fires_with_artificial.csv'
 SEA_CSV = RESULTS_DATA_DIR / 'sea.csv'
 ALGERIA_BOUNDARY = RESULTS_DATA_DIR / 'algeria_boundary.geojson'
 TUNISIA_BOUNDARY = RESULTS_DATA_DIR / 'tunisia_boundary.geojson'
 ALGERIA_LC_CLEAN = RESULTS_DATA_DIR / 'algeria_landcover_clean.geojson'
 TUNISIA_LC_CLEAN = RESULTS_DATA_DIR / 'tunisia_landcover_clean.geojson'
+MERGED_LC_CLEAN = RESULTS_DATA_DIR / 'merged_landcover_clean.geojson'
 
 # Intermediate processing files
 RESULTS_INTERMEDIATE_DIR = RESULTS_DIR / 'intermediate'
@@ -72,7 +74,6 @@ FIRES_WITH_CLIMATE = RESULTS_INTERMEDIATE_DIR / 'fires_with_climate.csv'
 FIRES_WITH_ELEVATION = RESULTS_INTERMEDIATE_DIR / 'fires_with_elevation_features.csv'
 FIRES_WITH_SOIL = RESULTS_INTERMEDIATE_DIR / 'fires_with_soil_features.csv'
 FIRES_WITH_SOIL_IDS = RESULTS_INTERMEDIATE_DIR / 'fires_with_soil_ids.csv'
-FIRES_WITH_ARTIFICIAL = RESULTS_INTERMEDIATE_DIR / 'fires_with_artificial_clipped.csv'
 FIRES_MERGED = RESULTS_INTERMEDIATE_DIR / 'fires_merged_all_features.csv'
 FIRES_MERGED_BALANCED = RESULTS_INTERMEDIATE_DIR / 'fires_merged_all_features_balanced.csv'
 
