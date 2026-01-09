@@ -59,8 +59,12 @@ RESULTS_DIR = PROJECT_ROOT / 'results'
 # Base data files
 RESULTS_DATA_DIR = RESULTS_DIR / 'data'
 FIRES_CSV = RESULTS_DATA_DIR / 'fires.csv'
-FIRES_RESULT_CSV = RESULTS_DATA_DIR / 'fires_clipped.csv'
-FIRES_WITH_ARTIFICIAL = RESULTS_DATA_DIR / 'fires_with_artificial.csv'
+
+FIRES_SUPERVISED_CSV = RESULTS_DATA_DIR / 'fires_supervised.csv'
+FIRES_UNSUPERVISED_CSV = RESULTS_DATA_DIR / 'fires_unsupervised.csv'
+FIRES_WITH_ARTIFICIAL_SUPERVISED = RESULTS_DATA_DIR / 'fires_with_artificial_supervised.csv'
+FIRES_WITH_ARTIFICIAL_UNSUPERVISED = RESULTS_DATA_DIR / 'fires_with_artificial_unsupervised.csv'
+
 SEA_CSV = RESULTS_DATA_DIR / 'sea.csv'
 ALGERIA_BOUNDARY = RESULTS_DATA_DIR / 'algeria_boundary.geojson'
 TUNISIA_BOUNDARY = RESULTS_DATA_DIR / 'tunisia_boundary.geojson'
@@ -82,6 +86,7 @@ RESULTS_FEATURES_DIR = RESULTS_DIR / 'features'
 BALANCED_DATASET = RESULTS_FEATURES_DIR / 'balanced_dataset.csv'
 IMBALANCED_DATASET = RESULTS_FEATURES_DIR / 'imbalanced_dataset.csv'
 FIRES_ENGINEERED = RESULTS_FEATURES_DIR / 'fires_engineered_features.csv'
+FIRES_ENGINEERED_PCA = RESULTS_FEATURES_DIR / 'fires_engineered_pca.csv'  # PCA-transformed (optional)
 SELECTED_FEATURES_TXT = RESULTS_FEATURES_DIR / 'selected_features.txt'
 FEATURE_IMPORTANCE_CSV = RESULTS_FEATURES_DIR / 'feature_importance_scores.csv'
 
