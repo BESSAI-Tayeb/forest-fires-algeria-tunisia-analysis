@@ -74,19 +74,49 @@ MERGED_LC_CLEAN = RESULTS_DATA_DIR / 'merged_landcover_clean.geojson'
 
 # Intermediate processing files
 RESULTS_INTERMEDIATE_DIR = RESULTS_DIR / 'intermediate'
+RESULTS_INTERMEDIATE_SUPERVISED_DIR = RESULTS_INTERMEDIATE_DIR / 'supervised'
+RESULTS_INTERMEDIATE_UNSUPERVISED_DIR = RESULTS_INTERMEDIATE_DIR / 'unsupervised'
+
 FIRES_WITH_CLIMATE = RESULTS_INTERMEDIATE_DIR / 'fires_with_climate.csv'
 FIRES_WITH_ELEVATION = RESULTS_INTERMEDIATE_DIR / 'fires_with_elevation_features.csv'
 FIRES_WITH_SOIL = RESULTS_INTERMEDIATE_DIR / 'fires_with_soil_features.csv'
 FIRES_WITH_SOIL_IDS = RESULTS_INTERMEDIATE_DIR / 'fires_with_soil_ids.csv'
+
+# Supervised intermediate files
+FIRES_WITH_CLIMATE_SUPERVISED = RESULTS_INTERMEDIATE_SUPERVISED_DIR / 'fires_with_climate.csv'
+FIRES_WITH_ELEVATION_SUPERVISED = RESULTS_INTERMEDIATE_SUPERVISED_DIR / 'fires_with_elevation_features.csv'
+FIRES_WITH_SOIL_SUPERVISED = RESULTS_INTERMEDIATE_SUPERVISED_DIR / 'fires_with_soil_features.csv'
+FIRES_MERGED_SUPERVISED = RESULTS_INTERMEDIATE_SUPERVISED_DIR / 'fires_merged_all_features.csv'
+
+# Unsupervised intermediate files
+FIRES_WITH_CLIMATE_UNSUPERVISED = RESULTS_INTERMEDIATE_UNSUPERVISED_DIR / 'fires_with_climate.csv'
+FIRES_WITH_ELEVATION_UNSUPERVISED = RESULTS_INTERMEDIATE_UNSUPERVISED_DIR / 'fires_with_elevation_features.csv'
+FIRES_WITH_SOIL_UNSUPERVISED = RESULTS_INTERMEDIATE_UNSUPERVISED_DIR / 'fires_with_soil_features.csv'
+FIRES_MERGED_UNSUPERVISED = RESULTS_INTERMEDIATE_UNSUPERVISED_DIR / 'fires_merged_all_features.csv'
+
+# Legacy paths (for backward compatibility)
 FIRES_MERGED = RESULTS_INTERMEDIATE_DIR / 'fires_merged_all_features.csv'
 FIRES_MERGED_BALANCED = RESULTS_INTERMEDIATE_DIR / 'fires_merged_all_features_balanced.csv'
 
 # Feature datasets (final)
 RESULTS_FEATURES_DIR = RESULTS_DIR / 'features'
+RESULTS_FEATURES_SUPERVISED_DIR = RESULTS_FEATURES_DIR / 'supervised'
+RESULTS_FEATURES_UNSUPERVISED_DIR = RESULTS_FEATURES_DIR / 'unsupervised'
+
+# Supervised feature outputs
+FIRES_ENGINEERED_SUPERVISED = RESULTS_FEATURES_SUPERVISED_DIR / 'fires_engineered_features.csv'
+SELECTED_FEATURES_SUPERVISED = RESULTS_FEATURES_SUPERVISED_DIR / 'selected_features.txt'
+FEATURE_IMPORTANCE_SUPERVISED = RESULTS_FEATURES_SUPERVISED_DIR / 'feature_importance_scores.csv'
+
+# Unsupervised feature outputs
+FIRES_ENGINEERED_UNSUPERVISED = RESULTS_FEATURES_UNSUPERVISED_DIR / 'fires_engineered_features.csv'
+FIRES_ENGINEERED_PCA_UNSUPERVISED = RESULTS_FEATURES_UNSUPERVISED_DIR / 'fires_engineered_pca.csv'
+
+# Legacy paths (for backward compatibility)
 BALANCED_DATASET = RESULTS_FEATURES_DIR / 'balanced_dataset.csv'
 IMBALANCED_DATASET = RESULTS_FEATURES_DIR / 'imbalanced_dataset.csv'
 FIRES_ENGINEERED = RESULTS_FEATURES_DIR / 'fires_engineered_features.csv'
-FIRES_ENGINEERED_PCA = RESULTS_FEATURES_DIR / 'fires_engineered_pca.csv'  # PCA-transformed (optional)
+FIRES_ENGINEERED_PCA = RESULTS_FEATURES_DIR / 'fires_engineered_pca.csv'
 SELECTED_FEATURES_TXT = RESULTS_FEATURES_DIR / 'selected_features.txt'
 FEATURE_IMPORTANCE_CSV = RESULTS_FEATURES_DIR / 'feature_importance_scores.csv'
 
@@ -130,6 +160,8 @@ def ensure_dirs():
     dirs = [
         RESULTS_DATA_DIR,
         RESULTS_INTERMEDIATE_DIR,
+        RESULTS_INTERMEDIATE_SUPERVISED_DIR,
+        RESULTS_INTERMEDIATE_UNSUPERVISED_DIR,
         RESULTS_FEATURES_DIR,
         RESULTS_MODELS_DIR,
         RESULTS_LOGS_DIR,

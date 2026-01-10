@@ -60,21 +60,120 @@ This project analyzes fire risk patterns in Algeria and Tunisia by integrating m
 
 ### Processed Datasets
 
-- **Merged Dataset**: `results/intermediate/fires_merged_all_features.csv`
+The project generates separate datasets for supervised and unsupervised learning:
 
-  - Total Features: 42 (3 base + 12 climate + 4 elevation + 23 soil)
-  - Total Samples: 5,978 rows
-  - No Missing Values: All NaN values handled during preprocessing
+#### Supervised Learning Datasets
+- **Location**: `results/intermediate/supervised/`
+- **Base Dataset**: `fires_with_artificial_supervised.csv` (lat > 33° for balanced classes)
+- **Merged Dataset**: `fires_merged_all_features.csv` - All features combined
 
+#### Unsupervised Learning Datasets
+- **Location**: `results/intermediate/unsupervised/`
+- **Base Dataset**: `fires_with_artificial_unsupervised.csv` (full geographic coverage)
+- **Merged Dataset**: `fires_merged_all_features.csv` - All features combined
+
+#### Feature Composition
+- Total Features: 42 (3 base + 12 climate + 4 elevation + 23 soil)
+- No Missing Values: All NaN values handled during preprocessing
+
+#### Additional Output Files
 - **Engineered Features**: `results/features/fires_engineered_features.csv`
-
-  - Enhanced feature set with domain-specific transformations
-
 - **Balanced Dataset**: `results/features/balanced_dataset.csv`
-
-  - Balanced class distribution for model training
-
 - **Imbalanced Dataset**: `results/features/imbalanced_dataset.csv`
-  - Original class distribution preserved
 
 ## 🗂️ Project Structure
+
+```
+DM/
+├── config.py                    # Centralized path configuration
+├── README.md
+├── requirements.txt
+├── analysis/
+│   ├── analysis/                # Data processing notebooks
+│   │   ├── landcover.ipynb      # 1️⃣ Land cover data processing
+│   │   ├── fire.ipynb           # 2️⃣ Fire dataset analysis & artificial points
+│   │   ├── climate.ipynb        # 3️⃣ Climate feature extraction
+│   │   ├── elevation.ipynb      # 4️⃣ Elevation feature extraction
+│   │   ├── soil.ipynb           # 5️⃣ Soil feature extraction
+│   │   ├── merge.ipynb          # 6️⃣ Merge all datasets
+│   │   └── sampling.ipynb       # Additional sampling utilities
+│   ├── supervised/              # Supervised learning notebooks
+│   │   ├── feature_engineering_supervised.ipynb
+│   │   ├── model_training.ipynb
+│   │   ├── decision_tree.ipynb
+│   │   ├── random_forest.ipynb
+│   │   └── knn.ipynb
+│   └── unsupervised/            # Unsupervised learning notebooks
+│       ├── feature_engineering_unsupervised.ipynb
+│       ├── kmeans.ipynb
+│       ├── dbscan.ipynb
+│       └── clarans.ipynb
+├── dataset/                     # Raw input data
+│   ├── fire_dataset/
+│   ├── climate_dataset/
+│   ├── elevation_dataset/
+│   ├── land_cover_dataset/
+│   └── soil_dataset/
+├── results/                     # Processed outputs
+│   ├── data/                    # Base processed data
+│   │   ├── fires.csv
+│   │   ├── fires_supervised.csv
+│   │   ├── fires_unsupervised.csv
+│   │   ├── fires_with_artificial_supervised.csv
+│   │   ├── fires_with_artificial_unsupervised.csv
+│   │   └── *.geojson            # Land cover boundaries
+│   ├── intermediate/            # Feature extraction outputs
+│   │   ├── supervised/          # Supervised learning pipeline
+│   │   │   ├── fires_with_climate.csv
+│   │   │   ├── fires_with_elevation_features.csv
+│   │   │   ├── fires_with_soil_features.csv
+│   │   │   └── fires_merged_all_features.csv
+│   │   └── unsupervised/        # Unsupervised learning pipeline
+│   │       ├── fires_with_climate.csv
+│   │       ├── fires_with_elevation_features.csv
+│   │       ├── fires_with_soil_features.csv
+│   │       └── fires_merged_all_features.csv
+│   ├── features/                # Engineered features
+│   └── models/                  # Trained model outputs
+├── models/                      # Custom ML implementations
+│   ├── decision_tree.py
+│   ├── random_forest.py
+│   ├── knn.py
+│   ├── kmeans.py
+│   └── dbscan.py
+├── report/                      # LaTeX report files
+└── scripts/                     # Automation scripts
+    └── slurm/                   # HPC cluster scripts
+```
+
+## 🚀 Notebook Execution Order
+
+Execute the data processing notebooks in the following order:
+
+| Step | Notebook | Description | Output |
+|------|----------|-------------|--------|
+| 1️⃣ | `analysis/analysis/landcover.ipynb` | Process land cover shapefiles, create boundaries | `results/data/*.geojson` |
+| 2️⃣ | `analysis/analysis/fire.ipynb` | Load fire data, generate artificial non-fire points, split supervised/unsupervised | `results/data/fires_*.csv` |
+| 3️⃣ | `analysis/analysis/climate.ipynb` | Extract climate features (precipitation, temperature) | `results/intermediate/*/fires_with_climate.csv` |
+| 4️⃣ | `analysis/analysis/elevation.ipynb` | Extract elevation features (slope, aspect, roughness) | `results/intermediate/*/fires_with_elevation_features.csv` |
+| 5️⃣ | `analysis/analysis/soil.ipynb` | Extract soil properties from HWSD database | `results/intermediate/*/fires_with_soil_features.csv` |
+| 6️⃣ | `analysis/analysis/merge.ipynb` | Merge all features into final datasets | `results/intermediate/*/fires_merged_all_features.csv` |
+
+### Execution Notes
+
+- **Dependencies**: Each notebook depends on outputs from previous notebooks
+- **Supervised vs Unsupervised**: Steps 3-6 process both supervised and unsupervised datasets in parallel
+- **Configuration**: All paths are managed via `config.py` - import it at the start of each notebook
+- **Sea Point Removal**: Fire notebook removes sea points (identified in soil processing) from all datasets
+
+### After Data Processing
+
+Once data processing is complete, proceed with:
+
+**For Supervised Learning:**
+1. `analysis/supervised/feature_engineering_supervised.ipynb`
+2. `analysis/supervised/model_training.ipynb` (or individual model notebooks)
+
+**For Unsupervised Learning:**
+1. `analysis/unsupervised/feature_engineering_unsupervised.ipynb`
+2. `analysis/unsupervised/kmeans.ipynb`, `dbscan.ipynb`, or `clarans.ipynb`
