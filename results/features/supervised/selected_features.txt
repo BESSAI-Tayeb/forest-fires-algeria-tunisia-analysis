@@ -1,0 +1,23 @@
+Selected Features for Model Training
+==================================================
+
+1. coastal_proximity
+2. prec_winter
+3. diurnal_temp_range
+4. tmax_summer
+5. annual_temp_range
+6. summer_heat_index
+7. ph_carbon_interaction
+8. tmin_winter
+9. ORG_CARBON
+10. tmax_spring
+11. elevation
+12. lat_long_interaction
+13. TOTAL_N
+14. tmin_summer
+15. SAND
+16. fertility_index
+17. roughness
+18. fine_fraction
+19. REF_BULK
+20. terrain_complexity

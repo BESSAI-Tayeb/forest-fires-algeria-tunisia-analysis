@@ -1,0 +1,35 @@
+SOIL DATA PROCESSING SUMMARY
+============================================================
+
+Input Data:
+  - Original HWSD records: 58,405
+  - Fire points: 28,432
+  - Fire points with soil_unit_id: 28,432
+
+Spatial Operations:
+  - Original raster: 21600 x 43200 pixels
+  - Clipped raster: 2222 x 2482 pixels
+  - Size reduction: 99.4%
+
+Data Preprocessing:
+  - Original records: 58,405
+  - Cleaned records: 58,405
+  - Soil features: 24
+  - Missing values after cleaning: 0
+
+Linking & Merging:
+  - Linking column used: HWSD2_SMU_ID
+  - Total fire records: 28426
+  - Records with complete soil data: 28426
+  - Records with missing soil data: 0
+
+Final Output:
+  - File: fires_with_soil_features.csv
+  - Shape: (28426, 28)
+  - Columns: longitude, latitude, class + 24 soil features
+  - Soil features: COARSE, SAND, SILT, CLAY, TEXTURE_USDA, BULK, REF_BULK, ORG_CARBON, PH_WATER, TOTAL_N, CN_RATIO, CEC_SOIL, CEC_CLAY, CEC_EFF, TEB, BSAT, ALUM_SAT, ESP, TCARBON_EQ, GYPSUM, ELEC_COND, TEXTURE_SOTER_F, TEXTURE_SOTER_M, TEXTURE_SOTER_V
+
+Additional Files:
+  - soil_features_cleaned.parquet (soil data with linking IDs)
+  - fires_with_soil_ids.csv (fire points with IDs)
+  - soil_raster_fires_clipped.tif (clipped raster)

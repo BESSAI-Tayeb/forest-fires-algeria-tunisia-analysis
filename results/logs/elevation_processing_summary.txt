@@ -1,0 +1,28 @@
+ELEVATION DATA PROCESSING SUMMARY
+============================================================
+
+Input Data:
+  - GMTED2010 Elevation Raster
+  - Resolution: 15 arc-seconds (~450m)
+  - Original size: 33600 x 86400 pixels
+  - Fire points: 28,432
+
+Spatial Operations:
+  - Clipped size: 4444 x 4964 pixels
+  - Size reduction: 99.2%
+
+Features Computed:
+  - Elevation (m)
+  - Slope (degrees)
+  - Aspect (degrees, 0-360)
+  - Terrain Roughness Index
+
+Preprocessing Steps:
+  1. Duplicate removal: 6 duplicates removed
+  2. Outlier handling: IQR method (winsorization for >5% outliers)
+  3. Normalization: StandardScaler (z-score)
+
+Final Output:
+  - File: fires_with_elevation_features.csv
+  - Records: 28,426
+  - Features: ['elevation', 'slope', 'aspect', 'roughness']
