@@ -65,6 +65,27 @@ tmp/
 # all markdown files
 *.md
 
+# GeoJSON files (large geospatial data)
+*.geojson
+
+# Raster files (GIS data)
+*.tif
+*.tiff
+*.asc
+*.bil
+*.bsq
+*.bip
+*.img
+*.jp2
+*.j2k
+*.ecw
+*.hdr
+*.prj
+*.aux.xml
+
+# Binary data files (parquet, etc)
+*.parquet
+
 # OS files
 Thumbs.db
 Desktop.ini
