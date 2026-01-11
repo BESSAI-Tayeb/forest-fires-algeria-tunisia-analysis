@@ -49,9 +49,6 @@ ipython_config.py
 *~
 .DS_Store
 
-# report and backup folder
-backup/
-results_backup/
 
 # Data files (all datasets)
 dataset
@@ -61,10 +58,6 @@ tmp/
 *.tmp
 *.bak
 *.cache
-
-# Results 
-results/*
-!results/data/*.csv
 
 # PDF files
 *.pdf
