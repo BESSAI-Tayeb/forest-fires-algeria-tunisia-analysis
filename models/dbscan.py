@@ -15,17 +15,19 @@ class DBSCAN:
     precompute : bool, default=True
         If True, pre-calculate distance matrix for faster clustering (O(n²) space, 10-50x speedup)
         If False, calculate distances on-the-fly (O(1) space, slower)
+    distance_matrix : numpy.ndarray, default=None
+        Pre-computed distance matrix. If provided, skips computation and uses this matrix directly.
     """
     
-    def __init__(self, eps=0.5, min_samples=5, metric='euclidean', precompute=True):
+    def __init__(self, eps=0.5, min_samples=5, metric='euclidean', precompute=True, distance_matrix=None):
         self.eps = eps
         self.min_samples = min_samples
         self.metric = metric
         self.precompute = precompute
+        self.distance_matrix = distance_matrix
         self.labels_ = None
         self.core_sample_indices_ = None
         self.n_clusters_ = 0
-        self.distance_matrix_ = None
         
     def _compute_distance(self, x1, x2):
         """Compute distance between two points."""
@@ -57,13 +59,9 @@ class DBSCAN:
             self.distance_matrix_ = np.sqrt(distances_sq)
             
         elif self.metric == 'manhattan':
-            # Manhattan distance
-            self.distance_matrix_ = np.zeros((n_samples, n_samples))
-            for i in range(n_samples):
-                for j in range(i, n_samples):
-                    dist = np.sum(np.abs(X[i] - X[j]))
-                    self.distance_matrix_[i, j] = dist
-                    self.distance_matrix_[j, i] = dist
+            # Vectorized Manhattan distance using broadcasting
+            diff = X[:, np.newaxis] - X[np.newaxis, :]
+            self.distance_matrix_ = np.sum(np.abs(diff), axis=2)
         else:
             raise ValueError(f"Unknown metric: {self.metric}")
     
@@ -157,7 +155,10 @@ class DBSCAN:
         n_samples = X.shape[0]
         
         # Pre-calculate distance matrix if requested
-        if self.precompute:
+        if self.distance_matrix is not None:
+            print(f"[DBSCAN] Using provided pre-computed distance matrix: shape {self.distance_matrix.shape}")
+            self.distance_matrix_ = self.distance_matrix
+        elif self.precompute:
             print(f"[DBSCAN] Pre-computing distance matrix ({n_samples} samples)...")
             self._compute_distance_matrix(X)
             matrix_memory_mb = (n_samples ** 2 * 8) / (1024 ** 2)
