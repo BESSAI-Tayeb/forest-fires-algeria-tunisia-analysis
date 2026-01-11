@@ -111,6 +111,9 @@ FEATURE_IMPORTANCE_SUPERVISED = RESULTS_FEATURES_SUPERVISED_DIR / 'feature_impor
 # Unsupervised feature outputs
 FIRES_ENGINEERED_UNSUPERVISED = RESULTS_FEATURES_UNSUPERVISED_DIR / 'fires_engineered_features.csv'
 FIRES_ENGINEERED_PCA_UNSUPERVISED = RESULTS_FEATURES_UNSUPERVISED_DIR / 'fires_engineered_pca.csv'
+# Additional unsupervised feature files (top-15 selections)
+FEATURES_TOP15_UNSUPERVISED = RESULTS_FEATURES_UNSUPERVISED_DIR / 'features_top15.csv'
+FIRES_ENGINEERED_TOP15_UNSUPERVISED = RESULTS_FEATURES_UNSUPERVISED_DIR / 'fires_engineered_top15.csv'
 
 # Legacy paths (for backward compatibility)
 BALANCED_DATASET = RESULTS_FEATURES_DIR / 'balanced_dataset.csv'
